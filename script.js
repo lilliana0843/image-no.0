@@ -18,38 +18,29 @@ document.getElementById('prev').onclick = () => {
   update();
 };
 
-// 點擊特定圖片跳到該張
-items.forEach((item) => {
-  item.addEventListener('click', () => {
-    // 點擊會先更新 active 選項
-    const img = item.querySelector("img");
-
-    // 如果這一張是中間的 active → 開啟大圖
-    if (item.classList.contains('active')) {
-      const full = img.dataset.full || img.src; 
-      lightboxImg.src = full;   // 讀取 data-full 大圖
-      lightbox.style.display = "flex";
-    }
-  });
-});
-
-/* ===========================
-   點擊 active 圖片 → 放大顯示
-   =========================== */
+// Lightbox
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
+// 點擊圖片：只有 active 才會開啟大圖
 items.forEach((item) => {
-  item.addEventListener('click', () => {
-    if (item.classList.contains('active')) {
-      const img = item.querySelector("img");
-      lightboxImg.src = img.src;
-      lightbox.style.display = "flex";
+  item.addEventListener("click", () => {
+    // 不是 active → 只是切換 index，不開大圖
+    if (!item.classList.contains("active")) {
+      index = [...items].indexOf(item);
+      update();
+      return;
     }
+
+    // 是 active → 開啟大圖
+    const img = item.querySelector("img");
+    const full = img.dataset.full || img.src; // 優先使用 data-full
+    lightboxImg.src = full;
+    lightbox.style.display = "flex";
   });
 });
 
-// 點擊背景關閉 Lightbox
+// 點擊背景關閉大圖
 lightbox.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
