@@ -19,10 +19,17 @@ document.getElementById('prev').onclick = () => {
 };
 
 // 點擊特定圖片跳到該張
-items.forEach((item, i) => {
+items.forEach((item) => {
   item.addEventListener('click', () => {
-    index = i;
-    update();
+    // 點擊會先更新 active 選項
+    const img = item.querySelector("img");
+
+    // 如果這一張是中間的 active → 開啟大圖
+    if (item.classList.contains('active')) {
+      const full = img.dataset.full || img.src; 
+      lightboxImg.src = full;   // 讀取 data-full 大圖
+      lightbox.style.display = "flex";
+    }
   });
 });
 
