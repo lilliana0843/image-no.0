@@ -1,4 +1,7 @@
 const items = document.querySelectorAll('.item');
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
 let index = 0;
 
 // 更新 active 顯示
@@ -18,43 +21,24 @@ document.getElementById('prev').onclick = () => {
   update();
 };
 
-// Lightbox
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-
-
-// ==========================
-// 滑鼠移上 → 變成 active
-// ==========================
+// 點擊圖片 → 成為 active，再點一次才放大
 items.forEach((item, i) => {
-  item.addEventListener("mouseenter", () => {
-    index = i;
-    update();
-  });
-});
+  item.addEventListener('click', () => {
 
-
-// ==========================
-// 點擊 active → 放大顯示
-// 點擊非 active → 不放大，只選中
-// ==========================
-items.forEach((item, i) => {
-  item.addEventListener("click", () => {
-    // 如果不是 active → 只負責切換 active
-    if (i !== index) {
+    // 1. 如果不是 active → 點一下變 active
+    if (!item.classList.contains("active")) {
       index = i;
       update();
       return;
     }
 
-    // 是 active → 開大圖
+    // 2. 如果已經是 active → 點一下放大
     const img = item.querySelector("img");
     const full = img.dataset.full || img.src;
     lightboxImg.src = full;
     lightbox.style.display = "flex";
   });
 });
-
 
 // 點擊背景關閉大圖
 lightbox.addEventListener("click", () => {
