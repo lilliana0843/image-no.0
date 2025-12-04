@@ -1,51 +1,153 @@
-body {
+/* ===========================
+   全局重置與基本樣式
+   =========================== */
+html, body {
   margin: 0;
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box; /* 建議開啟以避免寬度計算誤差 */
 }
 
+body {
+  /* 背景色與排版（可依需求調整） */
+  margin: 0;
+  background: #FFFFFF;                /* 頁面背景色 */
+  display: flex;
+  justify-content: center;         /* 置中整個輪播容器 */
+  align-items: center;             /* 垂直置中 */
+  height: 100vh;                   /* 滿高視窗 */
+  overflow: hidden;                /* 取消滾動條（如不需可改為 auto） */
+  font-family: sans-serif;         /* 字型 */
+  color: #000000;                     /* 內文預設顏色 */
+}
+
+/* ===========================
+   輪播容器（外框）
+   說明：
+   - width/ max-width 控制整體寬度
+   - gap 控制左右縮圖間距
+   =========================== */
 .carousel {
   width: 80%;
-  max-width: 900px;
+  max-width: 900px;        /* 最大寬度限制，適合桌面 */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  gap: 20px;
+  gap: 20px;               /* 兩張圖之間的間距，可調整 */
+  padding: 10px 0;         /* 上下內距（避免直接貼邊） */
 }
 
-.carousel img {
-  width: 200px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 10px;
-  opacity: 0.6;
+/* ===========================
+   每個項目（圖片 + 文字）
+   .item 為一張圖的容器，在 HTML 內使用 <div class="item"> 包含 <img> 與 <p class="caption">
+   =========================== */
+.item {
+  text-align: center;                    /* 文字置中 */
+  opacity: 0.5;                          /* 預設半透明，非中間時較淡 */
   transition: transform 0.4s ease, opacity 0.4s ease;
-  cursor: pointer;
+  cursor: pointer;                       /* 可點擊手勢 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.carousel img.active {
-  transform: scale(1.4);
+/* 被選中（中間）時的樣式：放大、顯示更高不透明度 */
+.item.active {
+  transform: scale(1.4);                 /* 放大倍率：可調 */
   opacity: 1;
-  z-index: 10;
+  z-index: 10;                           /* 提升層級以蓋過旁邊元素 */
 }
 
+/* 圖片樣式：大小與裁切方式 */
+.item img {
+  width: 200px;                          /* 圖片寬度（可自行改） */
+  height: 300px;                         /* 圖片高度（可自行改） */
+  object-fit: cover;                     /* 等比例裁切並填滿（不變形） */
+  border-radius: 10px;                   /* 圓角 */
+  display: block;
+}
+
+/* ===========================
+   圖片底下說明文字（caption）
+   說明：active 時可放大字型或提升對比
+   =========================== */
+.caption {
+  margin-top: 8px;                       /* 圖片與文字間距 */
+  color: #ddd;                           /* 非 active 時文字顏色 */
+  font-size: 14px;                       /* 基本字型大小 */
+  line-height: 1.2;
+  transition: opacity 0.3s, font-size 0.3s;
+  opacity: 0.7;
+}
+
+/* active 的文字更醒目 */
+.item.active .caption {
+  opacity: 1;
+  font-size: 16px;                       /* 可在此調整 active 時字型 */
+  color: #000000;
+}
+
+/* ===========================
+   左右控制按鈕 (Prev / Next)
+   說明：絕對定位於容器左右，z-index 提升避免被圖片蓋住
+   =========================== */
 .btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.85);    /* 按鈕背景，可改成 rgba(0,0,0,0.5) 深色系 */
   border: none;
-  padding: 10px 15px;
+  padding: 10px 14px;
   cursor: pointer;
   border-radius: 8px;
   font-size: 16px;
+  line-height: 1;
+  color: #111;                           /* 按鈕內字顏色（與背景反差） */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 20;
+  user-select: none;                     /* 防止按鈕文字被選取 */
 }
 
+/* 按鈕 hover 的微互動效果 */
+.btn:hover {
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(255,255,255,0.95);
+}
+
+/* 按鈕左右位置（調整偏移量決定按鈕離容器多遠） */
 #prev { left: -60px; }
 #next { right: -60px; }
+
+/* ===========================
+   響應（RWD）建議
+   - 手機畫面：縮小圖片、減少放大倍率、調整按鈕位置
+   =========================== */
+@media (max-width: 600px) {
+  .carousel {
+    width: 95%;
+    gap: 12px;
+  }
+
+  .item img {
+    width: 120px;     /* 手機圖片寬度 */
+    height: 180px;     /* 手機圖片高度 */
+  }
+
+  .item.active {
+    transform: scale(1.15);   /* 手機上不要放太大，避免超出畫面 */
+  }
+
+  #prev { left: -40px; }
+  #next { right: -40px; }
+
+  .caption { font-size: 12px; }
+}
+
+/* ===========================
+   可選擇加的輔助樣式（如需啟用可以取消註解）
+   1) 防止圖片選取
+   2) 圖片陰影
+   =========================== */
+
+/* .item img { user-drag: none; user-select: none; -webkit-user-drag: none; } */
+/* .item img { box-shadow: 0 8px 20px rgba(0,0,0,0.6); } */
