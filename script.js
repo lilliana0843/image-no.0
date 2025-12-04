@@ -22,23 +22,39 @@ document.getElementById('prev').onclick = () => {
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
-// 點擊圖片：只有 active 才會開啟大圖
-items.forEach((item) => {
+
+// ==========================
+// 滑鼠移上 → 變成 active
+// ==========================
+items.forEach((item, i) => {
+  item.addEventListener("mouseenter", () => {
+    index = i;
+    update();
+  });
+});
+
+
+// ==========================
+// 點擊 active → 放大顯示
+// 點擊非 active → 不放大，只選中
+// ==========================
+items.forEach((item, i) => {
   item.addEventListener("click", () => {
-    // 不是 active → 只是切換 index，不開大圖
-    if (!item.classList.contains("active")) {
-      index = [...items].indexOf(item);
+    // 如果不是 active → 只負責切換 active
+    if (i !== index) {
+      index = i;
       update();
       return;
     }
 
-    // 是 active → 開啟大圖
+    // 是 active → 開大圖
     const img = item.querySelector("img");
-    const full = img.dataset.full || img.src; // 優先使用 data-full
+    const full = img.dataset.full || img.src;
     lightboxImg.src = full;
     lightbox.style.display = "flex";
   });
 });
+
 
 // 點擊背景關閉大圖
 lightbox.addEventListener("click", () => {
