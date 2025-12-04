@@ -36,25 +36,24 @@
     <button id="next" class="btn">〉</button>
   </div>
 
-  <!-- 大圖預覽 Lightbox（注意：一定要放在 body 裡） -->
-  <div id="lightbox" style="
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.85);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
+ <!-- 大圖預覽 Lightbox -->
+<div id="lightbox" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+">
+  <img id="lightbox-img" style="
+    max-width:90%;
+    max-height:90%;
+    border-radius:12px;
   ">
-    <img id="lightbox-img" style="
-      max-width:90%;
-      max-height:90%;
-      border-radius:12px;
-    ">
-  </div>
+</div>
 
-  <!-- JS 放在最下面 -->
-  <script src="script.js"></script>
-
-</b
+ <script src="script.js"></script>
+</body>
+</html>
