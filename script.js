@@ -1,51 +1,32 @@
-const items = document.querySelectorAll('.item');
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
+const items = document.querySelectorAll(".item");
+const counter = document.querySelector(".counter");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
 
-let index = 0;
+let index = 0;             // 目前是第幾張當「最左邊」
+const perPage = 4;         // 一次顯示 4 張
+const itemWidth = 240;     // 220px + margin(20px)
 
-// 更新 active 顯示
 function update() {
-  items.forEach((item, i) => item.classList.toggle('active', i === index));
+  // 限制範圍（最後一頁不能超過總圖片數 - 4）
+  index = Math.max(0, Math.min(index, items.length - perPage));
+
+  // 移動畫面
+  const x = index * itemWidth * -1;
+  document.querySelector(".carousel").style.transform = `translateX(${x}px)`;
+
+  // 顯示 X / Y（顯示最左邊的 index + 1）
+  counter.textContent = `${index + 1} / ${items.length}`;
 }
 
-// 下一張
-document.getElementById('next').onclick = () => {
-  index = (index + 1) % items.length;
+next.onclick = () => {
+  index++;
   update();
 };
 
-// 上一張
-document.getElementById('prev').onclick = () => {
-  index = (index - 1 + items.length) % items.length;
+prev.onclick = () => {
+  index--;
   update();
 };
 
-/* ============================
-   Hover 移上去就選中
-   ============================ */
-items.forEach((item, i) => {
-  item.addEventListener("mouseenter", () => {
-    index = i;    // 更新 index
-    update();     // 刷新 active 顯示
-  });
-});
-
-/* ============================
-   點擊 active 才會開大圖
-   ============================ */
-items.forEach((item) => {
-  item.addEventListener("click", () => {
-    if (item.classList.contains("active")) {
-      const img = item.querySelector("img");
-      const full = img.dataset.full || img.src;
-      lightboxImg.src = full;
-      lightbox.style.display = "flex";
-    }
-  });
-});
-
-// 點 Lightbox 背景關閉
-lightbox.addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
+update();
