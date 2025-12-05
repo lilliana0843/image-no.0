@@ -21,26 +21,31 @@ document.getElementById('prev').onclick = () => {
   update();
 };
 
-// 點擊圖片 → 成為 active，再點一次才放大
+/* ============================
+   Hover 移上去就選中
+   ============================ */
 items.forEach((item, i) => {
-  item.addEventListener('click', () => {
-
-    // 1. 如果不是 active → 點一下變 active
-    if (!item.classList.contains("active")) {
-      index = i;
-      update();
-      return;
-    }
-
-    // 2. 如果已經是 active → 點一下放大
-    const img = item.querySelector("img");
-    const full = img.dataset.full || img.src;
-    lightboxImg.src = full;
-    lightbox.style.display = "flex";
+  item.addEventListener("mouseenter", () => {
+    index = i;    // 更新 index
+    update();     // 刷新 active 顯示
   });
 });
 
-// 點擊背景關閉大圖
+/* ============================
+   點擊 active 才會開大圖
+   ============================ */
+items.forEach((item) => {
+  item.addEventListener("click", () => {
+    if (item.classList.contains("active")) {
+      const img = item.querySelector("img");
+      const full = img.dataset.full || img.src;
+      lightboxImg.src = full;
+      lightbox.style.display = "flex";
+    }
+  });
+});
+
+// 點 Lightbox 背景關閉
 lightbox.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
