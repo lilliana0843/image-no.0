@@ -1,46 +1,73 @@
-const items = document.querySelectorAll('.item');
+// 取得 DOM
+const items = Array.from(document.querySelectorAll(".item"));
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const counter = document.querySelector(".counter");
+
+let startIndex = 0; // 目前顯示的起始 index
+const showCount = 4; // 一次顯示 4 張
+
+// ==============================
+// 更新畫面：顯示 4 張 + 套 active
+// ==============================
+function renderCarousel() {
+  items.forEach((item, i) => item.style.display = "none");
+
+  // 取出 4 個 index（環狀）
+  const visibleIndexes = [];
+  for (let i = 0; i < showCount; i++) {
+    visibleIndexes.push((startIndex + i) % items.length);
+  }
+
+  // 讓 4 張出現
+  visibleIndexes.forEach((index, i) => {
+    items[index].style.display = "flex";
+    items[index].classList.remove("active");
+    if (i === 1) items[index].classList.add("active"); // 第二張做 active
+  });
+
+  updateCounter(visibleIndexes[1]); // active 的 index 用來顯示數字
+}
+
+// ==============================
+// Counter 顯示（例如 2 / 12）
+// ==============================
+function updateCounter(activeIndex) {
+  counter.textContent = `${activeIndex + 1} / ${items.length}`;
+}
+
+// ==============================
+// 左右按鈕
+// ==============================
+nextBtn.addEventListener("click", () => {
+  startIndex = (startIndex + 1) % items.length;
+  renderCarousel();
+});
+
+prevBtn.addEventListener("click", () => {
+  startIndex = (startIndex - 1 + items.length) % items.length;
+  renderCarousel();
+});
+
+// ==============================
+// 點圖片 → 開大圖
+// ==============================
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
-let index = 0;
-
-// 更新 active 顯示
-function update() {
-  items.forEach((item, i) => item.classList.toggle('active', i === index));
-}
-
-// 下一張
-document.getElementById('next').onclick = () => {
-  index = (index + 1) % items.length;
-  update();
-};
-
-// 上一張
-document.getElementById('prev').onclick = () => {
-  index = (index - 1 + items.length) % items.length;
-  update();
-};
-
-// 點擊圖片 → 成為 active，再點一次才放大
-items.forEach((item, i) => {
-  item.addEventListener('click', () => {
-
-    // 1. 如果不是 active → 點一下變 active
-    if (!item.classList.contains("active")) {
-      index = i;
-      update();
-      return;
-    }
-
-    // 2. 如果已經是 active → 點一下放大
-    const img = item.querySelector("img");
-    const full = img.dataset.full || img.src;
-    lightboxImg.src = full;
+items.forEach(item => {
+  item.addEventListener("click", () => {
+    const img = item.querySelector("img").dataset.full;
+    lightboxImg.src = img;
     lightbox.style.display = "flex";
   });
 });
 
-// 點擊背景關閉大圖
 lightbox.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
+
+// ==============================
+// 初始化
+// ==============================
+renderCarousel();
