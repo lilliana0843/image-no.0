@@ -32,7 +32,6 @@ body {
 .item.active img {
   opacity: 1;
   transform: scale(1.05);
-  filter: brightness(1);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   transition: 0.25s;
 }
