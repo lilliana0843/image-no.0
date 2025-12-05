@@ -5,53 +5,45 @@ const nextBtn = document.getElementById("next");
 const counter = document.querySelector(".counter");
 
 let startIndex = 0; // 目前顯示的起始 index
-const showCount = 5; // 一次顯示 5 張
+const showCount = 4; // 一次顯示 4 張
 
 // ==============================
-// 更新畫面：顯示 5 張 + 套 active
+// 更新畫面：顯示 4 張 + 套 active
 // ==============================
 function renderCarousel() {
-  items.forEach(item => item.style.display = "none");
+  items.forEach((item, i) => item.style.display = "none");
 
-  // 計算這頁可顯示的 index
   const visibleIndexes = [];
   for (let i = 0; i < showCount; i++) {
     visibleIndexes.push((startIndex + i) % items.length);
   }
 
-  // 讓 4 張出現
   visibleIndexes.forEach((index, i) => {
-    const item = items[index];
-    item.style.display = "flex";
-    item.classList.remove("active", "clicked");
-    if (i === 1) item.classList.add("active"); // 第二張 active（你的原設定）
+    items[index].style.display = "flex";
+    items[index].classList.remove("active");
+
+    // 預設讓第 1 張成為 active
+    if (i === 1) items[index].classList.add("active");
   });
 
   updateCounter(visibleIndexes[1]);
-
   updateButtons();
 }
 
-// ==============================
-// 控制按鈕灰色（不可點）
-// ==============================
-function updateButtons() {
-  prevBtn.disabled = startIndex === 0;
-  nextBtn.disabled = startIndex + showCount >= items.length;
-}
-
-// ==============================
 // Counter 顯示（例如 2 / 12）
-// ==============================
 function updateCounter(activeIndex) {
   counter.textContent = `${activeIndex + 1} / ${items.length}`;
 }
 
-// ==============================
-// 左右按鈕（不可超過兩端）
-// ==============================
+// 按鈕灰色控制
+function updateButtons() {
+  prevBtn.disabled = startIndex === 0;
+  nextBtn.disabled = startIndex >= items.length - showCount;
+}
+
+// 左右按鈕
 nextBtn.addEventListener("click", () => {
-  if (startIndex + showCount < items.length) {
+  if (startIndex < items.length - showCount) {
     startIndex++;
     renderCarousel();
   }
@@ -65,42 +57,32 @@ prevBtn.addEventListener("click", () => {
 });
 
 // ==============================
-// 點圖片：hover → clicked → 放大
+// 點圖片（依照你的需求區分兩段邏輯）
 // ==============================
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
-items.forEach((item, i) => {
+items.forEach(item => {
   item.addEventListener("click", () => {
 
-    // 若是第二張 active，那就可能需要 clicked → 放大
+    // 如果這張已經是 active → 再點一下就是打開大圖
     if (item.classList.contains("active")) {
-
-      // 第一次點 → clicked（亮框）
-      if (!item.classList.contains("clicked")) {
-        item.classList.add("clicked");
-        return;
-      }
-
-      // 第二次點 → lightbox 放大
-      const img = item.querySelector("img").dataset.full;
-      lightboxImg.src = img;
+      const imgURL = item.querySelector("img").dataset.full;
+      lightboxImg.src = imgURL;
       lightbox.style.display = "flex";
       return;
     }
 
-    // 若點別張 → 不進入 clicked，比照你的原本邏輯：不跳頁，只是顯示 lightbox
-    const img = item.querySelector("img").dataset.full;
-    lightboxImg.src = img;
-    lightbox.style.display = "flex";
+    // 點到別張 → 變 active（不開大圖）
+    items.forEach(i => i.classList.remove("active"));
+    item.classList.add("active");
   });
 });
 
+// Lightbox 收合
 lightbox.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
 
-// ==============================
 // 初始化
-// ==============================
 renderCarousel();
