@@ -22,7 +22,7 @@ body {
   未 active
 =============================*/
 .item:not(.active) img {
-  opacity: 0.8;
+  opacity: 0.75;
   transition: 0.25s;
 }
 
@@ -79,9 +79,9 @@ body {
   按鈕
 =============================*/
 .btn {
-  background: none;
+  background: #f2f2f2;
   border: 2px solid #92849c;
-  color: #92849c;
+  color: #b193c7;
   font-size: 26px;
   padding: 5px 12px;
   border-radius: 6px;
