@@ -17,10 +17,7 @@ body {
 }
 
 /* 點一下（active 圖才會套用） */
-.item.active {
-  border: 2px solid #00aaff;
-  box-shadow: 0 0 10px #00aaff;
-}
+
 
 /* 按鈕灰色 */
 button:disabled {
