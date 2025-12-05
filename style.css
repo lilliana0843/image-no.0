@@ -1,138 +1,134 @@
-/* ========== Reset / 基本 ========== */
+/* ===========================
+   全局設定
+   =========================== */
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   background: #FFFFFF;
-  font-family: sans-serif;
-  color: #000;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
-/* ========== 主圖區 ========== */
-.main-view {
-  margin-top: 24px;
-  text-align: center;
-}
-#main-img {
-  width: 420px;
-  height: 420px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
+/* ===========================
+   計數器
+   =========================== */
 .counter {
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
 }
 
-/* ========== 輪播外框 & track ========== */
-/* wrapper 將箭頭與 viewport 放在同一行 */
-.carousel-wrapper {
-  margin-top: 22px;
+/* ===========================
+   輪播容器
+   =========================== */
+.carousel {
+  width: 80%;
+  max-width: 900px;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-/* 左右按鈕 */
-.btn {
-  background: rgba(255,255,255,0.95);
-  border: none;
-  padding: 10px 14px;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 18px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-  user-select: none;
-}
-
-/* viewport：顯示區，overflow hidden */
-.carousel-viewport {
-  width: 900px; /* 可視寬度，視需求調整 */
+  justify-content: center;
+  position: relative;
+  gap: 20px;
+  padding: 10px 0;
   overflow: hidden;
 }
 
-/* track：實際水平排列縮圖的容器 */
-.carousel-track {
-  display: flex;
-  transition: transform 0.35s ease;
-  will-change: transform;
+/* ===========================
+   每個項目
+   =========================== */
+.item {
+  text-align: center;
+  opacity: 0.5;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* item：每個縮圖容器 */
-.item {
-  width: 210px;      /* 各 item 固定寬度（含內邊距後視效果） */
-  padding: 8px;
-  text-align: center;
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  cursor: pointer;
+.item.active {
+  transform: scale(1.4);
+  opacity: 1;
+  z-index: 10;
 }
+
 .item img {
-  width: 100%;
-  height: 150px;
+  width: 200px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   display: block;
 }
 
-/* 當前 active 的視覺效果（你原本放大風格改成 subtle） */
-.item.active {
-  transform: translateY(-6px) scale(1.03);
-  opacity: 1;
-  z-index: 5;
-}
-
-/* hover 的預覽效果（不改 active） */
-.item img:hover {
-  transform: scale(1.04);
-}
-
-/* caption */
+/* 標題 */
 .caption {
-  margin-top: 6px;
+  margin-top: 8px;
+  color: #00000099;
   font-size: 14px;
-  color: #333;
+  transition: opacity 0.3s, font-size 0.3s;
 }
 
-/* ========== Lightbox ========== */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-.lightbox img {
-  max-width: 92%;
-  max-height: 92%;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+.item.active .caption {
+  opacity: 1;
+  font-size: 16px;
+  color: #000;
 }
 
-/* ========== RWD ========== */
-@media (max-width: 1100px) {
-  .carousel-viewport { width: 720px; }
-  .item { width: 170px; }
-  #main-img { width: 360px; height: 360px; }
+/* ===========================
+   左右按鈕
+   =========================== */
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 20;
+  user-select: none;
 }
-@media (max-width: 800px) {
-  .carousel-viewport { width: 95vw; }
-  .item { width: calc((95vw - 40px) / 4); } /* 自動計算 4 張 */
-  #main-img { width: 300px; height: 300px; }
+
+.btn:hover {
+  transform: translateY(-50%) scale(1.05);
 }
-@media (max-width: 480px) {
-  /* 手機上改成 2 張顯示（如果想要） */
-  .item { width: calc((95vw - 24px) / 2); }
-  #main-img { width: 220px; height: 220px; }
+
+#prev { left: -60px; }
+#next { right: -60px; }
+
+/* ===========================
+   手機版 RWD
+   =========================== */
+@media (max-width: 600px) {
+  .carousel {
+    width: 95%;
+    gap: 12px;
+  }
+
+  .item img {
+    width: 120px;
+    height: 180px;
+  }
+
+  .item.active {
+    transform: scale(1.2);
+  }
+
+  #prev { left: -40px; }
+  #next { right: -40px; }
+
+  .caption { font-size: 12px; }
 }
