@@ -5,10 +5,10 @@ const nextBtn = document.getElementById("next");
 const counter = document.querySelector(".counter");
 
 let startIndex = 0;
-const showCount = 4;
+const showCount = 5;
 
 // ==============================
-// 更新畫面：顯示 4 張 + 套 active
+// 更新畫面：顯示 5 張 + 套 active
 // ==============================
 function renderCarousel() {
   items.forEach(item => item.style.display = "none");
