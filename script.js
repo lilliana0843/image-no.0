@@ -30,7 +30,12 @@ function renderCarousel() {
     }
   });
 
-  updateCounter(visibleIndexes[1]);
+  // 顯示 counter
+  const activeIndex = visibleIndexes.find(index =>
+    items[index].classList.contains("active")
+  );
+
+  updateCounter(activeIndex);
   updateButtons();
 }
 
@@ -73,7 +78,7 @@ const lightboxImg = document.getElementById("lightbox-img");
 items.forEach(item => {
   item.addEventListener("click", () => {
 
-    // ----- 如果已經是 ACTIVE：開大圖 -----
+    // 若已是 active → 開大圖
     if (item.classList.contains("active")) {
       const imgURL = item.querySelector("img").dataset.full;
       lightboxImg.src = imgURL;
@@ -81,9 +86,15 @@ items.forEach(item => {
       return;
     }
 
-    // ----- 變成 ACTIVE（第一次點）-----
+    // 變成 active（第一次點）
     items.forEach(i => i.classList.remove("active"));
     item.classList.add("active");
+
+    // ⭐ 點了第幾張，就把它滾到第二格位置（保持穩定）
+    const index = items.indexOf(item);
+    startIndex = Math.max(0, Math.min(index - 1, items.length - showCount));
+
+    renderCarousel();
   });
 });
 
