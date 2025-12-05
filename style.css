@@ -1,153 +1,96 @@
-/* ===========================
-   全局重置與基本樣式
-   =========================== */
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  background: #FFFFFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  background: #000;
+  color: #fff;
   font-family: sans-serif;
-  color: #000000;
-}
-
-/* ===========================
-   輪播容器（外框）
-   =========================== */
-.carousel {
-  width: 80%;
-  max-width: 900px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  gap: 20px;
-  padding: 10px 0;
-}
-
-/* ===========================
-   每個項目（圖片 + 文字）
-   =========================== */
-.item {
-  text-align: center;
-  opacity: 0.5;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  cursor: pointer;
-  display: inline-flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  padding-top: 30px;
 }
 
-/* 點擊後成為 active（主選中） */
-.item.active {
-  transform: scale(1.4);
-  opacity: 1;
-  z-index: 10;
+/* 計數器 */
+.counter {
+  margin-bottom: 15px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-/* ===========================
-   滑鼠 Hover 視覺效果（新增）
-   =========================== */
-.item:hover {
-  transform: scale(1.15);     /* hover 略放大 */
-  opacity: 1;                 /* 亮一點 */
-  z-index: 5;
+/* 外層輪播 */
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* active + hover = 再更大一點（不搶 active 效果） */
-.item.active:hover {
-  transform: scale(1.45);
-}
-
-/* ===========================
-   圖片樣式
-   =========================== */
-.item img {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-}
-
-/* ===========================
-   Caption 底下文字
-   =========================== */
-.caption {
-  margin-top: 8px;
-  color: #ddd;
-  font-size: 14px;
-  line-height: 1.2;
-  transition: opacity 0.3s, font-size 0.3s;
-  opacity: 0.7;
-}
-
-.item.active .caption {
-  opacity: 1;
-  font-size: 16px;
-  color: #000000;
-}
-
-/* ===========================
-   左右控制按鈕
-   =========================== */
-.btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.85);
-  border: none;
-  padding: 10px 14px;
+/* 每一項目 */
+.item {
+  display: none; /* 由 JS 控制顯示 */
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
   cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* 未 active 的清爽模糊透明 */
+.item:not(.active) img {
+  opacity: 0.5;
+  transform: scale(0.9);
+  filter: blur(1px);
+  transition: 0.25s;
+}
+
+/* active 的效果 */
+.item.active img {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* hover 額外強化提示（不更換 active，只視覺） */
+.item:hover img {
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: scale(1.05);
+}
+
+/* 圖片本體 */
+.item img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 8px;
-  font-size: 16px;
-  line-height: 1;
-  color: #111;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 20;
-  user-select: none;
+}
+
+/* 按鈕 */
+.btn {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 26px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .btn:hover {
-  transform: translateY(-50%) scale(1.03);
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.15);
 }
 
-#prev { left: -60px; }
-#next { right: -60px; }
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
 
-/* ===========================
-   RWD：手機調整
-   =========================== */
-@media (max-width: 600px) {
-  .carousel {
-    width: 95%;
-    gap: 12px;
-  }
-
-  .item img {
-    width: 120px;
-    height: 180px;
-  }
-
-  .item.active {
-    transform: scale(1.15);
-  }
-
-  .item.active:hover {
-    transform: scale(1.25);
-  }
-
-  #prev { left: -40px; }
-  #next { right: -40px; }
-
-  .caption { font-size: 12px; }
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
 }
