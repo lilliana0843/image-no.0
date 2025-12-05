@@ -33,13 +33,6 @@ body {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* 未 active 的清爽模糊透明 */
-.item:not(.active) img {
-  opacity: 0.5;
-  transform: scale(0.9);
-  filter: blur(1px);
-  transition: 0.25s;
-}
 
 /* active 的效果 */
 .item.active img {
