@@ -5,90 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview Carousel</title>
 
+  <!-- 連接 CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <!-- 主圖與計數器 -->
-  <img id="main-img" src="img/all/毛毛-1.png" class="main-img" />
+
+  <!-- 顯示目前第幾張 -->
   <div class="counter">1 / 12</div>
-  
-  <!-- 縮圖輪播 -->
+
   <div class="carousel">
     <button id="prev" class="btn">〈</button>
 
-    <!-- ⭐ 新增 viewport（限制 4 張寬度） -->
-    <div class="carousel-viewport">
-      <!-- ⭐ 新增 track（可左右移動） -->
-      <div class="carousel-track">
+    <div class="item active">
+      <img src="img/all/毛毛-1.png" data-full="img/all/毛毛-1.png" />
+      <p class="caption">毛毛</p>
+    </div>
 
-        <div class="item active">
-          <img src="img/all/毛毛-1.png" data-full="img/all/毛毛-1.png" />
-          <p class="caption">毛毛</p>
-        </div>
+    <div class="item">
+      <img src="img/all/毛毛-2.jpg" data-full="img/all/毛毛-2.jpg" />
+      <p class="caption">毛毛</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/毛毛-2.jpg" data-full="img/all/毛毛-2.jpg" />
-          <p class="caption">毛毛</p>
-        </div>
+    <div class="item">
+      <img src="img/all/毛毛-6.png" data-full="img/all/毛毛-6.png" />
+      <p class="caption">毛毛</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/毛毛-6.png" data-full="img/all/毛毛-6.png" />
-          <p class="caption">毛毛</p>
-        </div>
+    <div class="item">
+      <img src="img/all/毛毛-8.jpg" data-full="img/all/毛毛-8.jpg" />
+      <p class="caption">毛毛</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/毛毛-8.jpg" data-full="img/all/毛毛-8.jpg" />
-          <p class="caption">毛毛</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-1.png" data-full="img/all/鉛筆-1.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-1.png" data-full="img/all/鉛筆-1.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-2.png" data-full="img/all/鉛筆-2.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-2.png" data-full="img/all/鉛筆-2.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-3.png" data-full="img/all/鉛筆-3.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-3.png" data-full="img/all/鉛筆-3.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-4.png" data-full="img/all/鉛筆-4.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-4.png" data-full="img/all/鉛筆-4.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-5.png" data-full="img/all/鉛筆-5.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-5.png" data-full="img/all/鉛筆-5.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-6.png" data-full="img/all/鉛筆-6.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-6.png" data-full="img/all/鉛筆-6.png" />
-          <p class="caption">鉛筆</p>
-        </div>
+    <div class="item">
+      <img src="img/all/鉛筆-7.png" data-full="img/all/鉛筆-7.png" />
+      <p class="caption">鉛筆</p>
+    </div>
 
-        <div class="item">
-          <img src="img/all/鉛筆-7.png" data-full="img/all/鉛筆-7.png" />
-          <p class="caption">鉛筆</p>
-        </div>
-
-        <div class="item">
-          <img src="img/all/鉛筆-8.png" data-full="img/all/鉛筆-8.png" />
-          <p class="caption">鉛筆</p>
-        </div>
-
-      </div>
+    <div class="item">
+      <img src="img/all/鉛筆-8.png" data-full="img/all/鉛筆-8.png" />
+      <p class="caption">鉛筆</p>
     </div>
 
     <button id="next" class="btn">〉</button>
   </div>
 
-  <!-- Lightbox -->
+
+  <!-- 大圖預覽 Lightbox -->
   <div id="lightbox" style="
     display:none;
     position:fixed;
