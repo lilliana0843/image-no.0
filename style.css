@@ -108,12 +108,6 @@ body {
   user-select: none;                     /* 防止按鈕文字被選取 */
 }
 
-.carousel {
-  display: flex;
-  width: 900px;  /* 可視區塊，4 張用 900px */
-  overflow: hidden;
-}
-
 /* 按鈕 hover 的微互動效果 */
 .btn:hover {
   transform: translateY(-50%) scale(1.03);
