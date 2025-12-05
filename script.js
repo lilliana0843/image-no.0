@@ -1,32 +1,46 @@
-const items = document.querySelectorAll(".item");
-const counter = document.querySelector(".counter");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
+const items = document.querySelectorAll('.item');
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
 
-let index = 0;             // 目前是第幾張當「最左邊」
-const perPage = 4;         // 一次顯示 4 張
-const itemWidth = 240;     // 220px + margin(20px)
+let index = 0;
 
+// 更新 active 顯示
 function update() {
-  // 限制範圍（最後一頁不能超過總圖片數 - 4）
-  index = Math.max(0, Math.min(index, items.length - perPage));
-
-  // 移動畫面
-  const x = index * itemWidth * -1;
-  document.querySelector(".carousel").style.transform = `translateX(${x}px)`;
-
-  // 顯示 X / Y（顯示最左邊的 index + 1）
-  counter.textContent = `${index + 1} / ${items.length}`;
+  items.forEach((item, i) => item.classList.toggle('active', i === index));
 }
 
-next.onclick = () => {
-  index++;
+// 下一張
+document.getElementById('next').onclick = () => {
+  index = (index + 1) % items.length;
   update();
 };
 
-prev.onclick = () => {
-  index--;
+// 上一張
+document.getElementById('prev').onclick = () => {
+  index = (index - 1 + items.length) % items.length;
   update();
 };
 
-update();
+// 點擊圖片 → 成為 active，再點一次才放大
+items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+
+    // 1. 如果不是 active → 點一下變 active
+    if (!item.classList.contains("active")) {
+      index = i;
+      update();
+      return;
+    }
+
+    // 2. 如果已經是 active → 點一下放大
+    const img = item.querySelector("img");
+    const full = img.dataset.full || img.src;
+    lightboxImg.src = full;
+    lightbox.style.display = "flex";
+  });
+});
+
+// 點擊背景關閉大圖
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
