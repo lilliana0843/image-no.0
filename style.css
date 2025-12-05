@@ -52,6 +52,13 @@ button:disabled {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+/* 未 active 的清爽模糊透明 */
+.item:not(.active) img {
+  opacity: 0.8;
+  transform: scale(1);
+  filter: blur(0px);
+  transition: 0.25s;
+}
 
 /* active 的效果 */
 .item.active img {
