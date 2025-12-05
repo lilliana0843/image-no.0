@@ -92,7 +92,7 @@ items.forEach(item => {
 
     // ⭐ 點了第幾張，就把它滾到第二格位置（保持穩定）
     const index = items.indexOf(item);
-    startIndex = Math.max(0, Math.min(index - 1, items.length - showCount));
+    startIndex = Math.max(0, Math.min(index - 2, items.length - showCount));
 
     renderCarousel();
   });
