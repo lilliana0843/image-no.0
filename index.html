@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview Carousel</title>
 
-  <!-- 連接 CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- 顯示目前第幾張 -->
+  <!-- 計數器 -->
   <div class="counter">1 / 12</div>
 
+  <!-- 主要輪播 -->
   <div class="carousel">
     <button id="prev" class="btn">〈</button>
 
-    <div class="item active">
+    <!-- 你的所有 item（不要重複 active） -->
+    <div class="item">
       <img src="img/all/毛毛-1.png" data-full="img/all/毛毛-1.png" />
       <p class="caption">毛毛</p>
     </div>
@@ -79,23 +80,9 @@
     <button id="next" class="btn">〉</button>
   </div>
 
-
-  <!-- 大圖預覽 Lightbox -->
-  <div id="lightbox" style="
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.85);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
-  ">
-    <img id="lightbox-img" style="
-      max-width:90%;
-      max-height:90%;
-      border-radius:12px;
-    ">
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img">
   </div>
 
   <script src="script.js"></script>
