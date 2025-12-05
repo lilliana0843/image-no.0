@@ -1,5 +1,5 @@
 /* ===========================
-   全局設定
+   全局重置與基本樣式
    =========================== */
 html, body {
   margin: 0;
@@ -8,28 +8,19 @@ html, body {
 }
 
 body {
+  margin: 0;
   background: #FFFFFF;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
   font-family: sans-serif;
+  color: #000000;
 }
 
 /* ===========================
-   計數器
-   =========================== */
-.counter {
-  margin-bottom: 15px;
-  font-size: 20px;
-  color: #000;
-  font-weight: bold;
-}
-
-/* ===========================
-   輪播容器
+   輪播容器（外框）
    =========================== */
 .carousel {
   width: 80%;
@@ -40,11 +31,10 @@ body {
   position: relative;
   gap: 20px;
   padding: 10px 0;
-  overflow: hidden;
 }
 
 /* ===========================
-   每個項目
+   每個項目（圖片 + 文字）
    =========================== */
 .item {
   text-align: center;
@@ -56,12 +46,30 @@ body {
   align-items: center;
 }
 
+/* 點擊後成為 active（主選中） */
 .item.active {
   transform: scale(1.4);
   opacity: 1;
   z-index: 10;
 }
 
+/* ===========================
+   滑鼠 Hover 視覺效果（新增）
+   =========================== */
+.item:hover {
+  transform: scale(1.15);     /* hover 略放大 */
+  opacity: 1;                 /* 亮一點 */
+  z-index: 5;
+}
+
+/* active + hover = 再更大一點（不搶 active 效果） */
+.item.active:hover {
+  transform: scale(1.45);
+}
+
+/* ===========================
+   圖片樣式
+   =========================== */
 .item img {
   width: 200px;
   height: 300px;
@@ -70,22 +78,26 @@ body {
   display: block;
 }
 
-/* 標題 */
+/* ===========================
+   Caption 底下文字
+   =========================== */
 .caption {
   margin-top: 8px;
-  color: #00000099;
+  color: #ddd;
   font-size: 14px;
+  line-height: 1.2;
   transition: opacity 0.3s, font-size 0.3s;
+  opacity: 0.7;
 }
 
 .item.active .caption {
   opacity: 1;
   font-size: 16px;
-  color: #000;
+  color: #000000;
 }
 
 /* ===========================
-   左右按鈕
+   左右控制按鈕
    =========================== */
 .btn {
   position: absolute;
@@ -96,38 +108,24 @@ body {
   padding: 10px 14px;
   cursor: pointer;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1;
+  color: #111;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   z-index: 20;
   user-select: none;
 }
 
 .btn:hover {
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(255,255,255,0.95);
 }
-
-/* ===========================
-   滑鼠 Hover 視覺效果（不切圖）
-   =========================== */
-
-.item:hover {
-  transform: scale(1.15);           /* hover 縮圖微放大 */
-  opacity: 1;                       /* 變亮 */
-  z-index: 5;                       /* 浮到上層避免被蓋住 */
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* 僅在 hover 時放大，不覆蓋 active 的放大效果 */
-.item.active:hover {
-  transform: scale(1.45);           /* active 本來 1.4 → hover 加強一點 */
-}
-
 
 #prev { left: -60px; }
 #next { right: -60px; }
 
 /* ===========================
-   手機版 RWD
+   RWD：手機調整
    =========================== */
 @media (max-width: 600px) {
   .carousel {
@@ -141,7 +139,11 @@ body {
   }
 
   .item.active {
-    transform: scale(1.2);
+    transform: scale(1.15);
+  }
+
+  .item.active:hover {
+    transform: scale(1.25);
   }
 
   #prev { left: -40px; }
