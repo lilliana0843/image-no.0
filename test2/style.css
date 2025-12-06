@@ -108,7 +108,7 @@ button:disabled {
 
   /* 一行顯示五張 → 手機縮小比例 */
   .item {
-    width: calc(20% - 6px); /* ⭐ 五等分 */
+    width: calc(50% - 6px); /* ⭐ 五等分 */
     display: flex;
   }
 
