@@ -1,157 +1,144 @@
+/* ===== 整體頁面設定 ===== */
 body {
-  background: #ffffff;
-  color: #000;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding-top: 30px;
+  background: #ffffff;            /* 白色背景 */
+  color: #000;                    /* 黑色文字 */
+  font-family: sans-serif;        /* 無襯線字體 */
+  display: flex;                  /* 使用 flex 排版 */
+  flex-direction: column;         /* 元素垂直排列 */
+  align-items: center;            /* 水平置中內容 */
+  margin: 0;                      /* 移除預設 margin */
+  padding-top: 30px;              /* 頂部留白避免貼邊 */
 }
 
-/*=============================
-  滑鼠 hover（不變 active）
-=============================*/
+/* ===== 滑鼠 hover 讓圖片微放大（不影響 active 狀態） ===== */
 .item:hover img {
-  transform: scale(1.05);
-  filter: none;
-  transition: 0.2s;
+  transform: scale(1.05);         /* 放大 1.05 倍 */
+  filter: none;                   /* 移除任何濾鏡效果 */
+  transition: 0.2s;               /* 動畫時間 0.2 秒 */
 }
 
-/*=============================
-  未 active
-=============================*/
+/* ===== 非 active 狀態的圖片透明度調低 ===== */
 .item:not(.active) img {
-  opacity: 0.75;
-  transition: 0.25s;
+  opacity: 0.75;                  /* 透明度 75% */
+  transition: 0.25s;              /* 過渡動畫 */
 }
 
-/*=============================
-  active（點一下）
-=============================*/
+/* ===== active（點擊後選中）圖片變亮＋放大 ===== */
 .item.active img {
-  opacity: 1;
-  transform: scale(1.05);
-  filter: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-  transition: 0.25s;
+  opacity: 1;                     /* 完全不透明 */
+  transform: scale(1.05);         /* 放大 */
+  filter: none;                   /* 保持清晰無濾鏡 */
+  box-shadow: 0 0 5px rgba(0,0,0,0.25); /* 周圍加微陰影 */
+  transition: 0.25s;              /* 動畫時間 */
 }
 
-/*=============================
-  項目本體
-=============================*/
+/* ===== 每個 item（包含圖片與文字） ===== */
 .item {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-  cursor: pointer;
+  display: none;                  /* 預設隱藏（JS 控制顯示） */
+  flex-direction: column;         /* 圖片與文字上下排列 */
+  align-items: center;            /* 水平置中 */
+  width: 200px;                   /* 每個 item 寬度 */
+  cursor: pointer;                /* 滑過變成可點擊 */
 }
 
-/* 圖片本體 */
+/* ===== 圖片本體設定 ===== */
 .item img {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: 0.25s ease;
+  width: 200px;                   /* 圖片寬度 */
+  height: 300px;                  /* 圖片高度 */
+  object-fit: cover;              /* 保持比例裁切填滿 */
+  border-radius: 8px;             /* 圓角 */
+  transition: 0.25s ease;         /* 動畫 */
 }
 
-/*=============================
-  計數器
-=============================*/
+/* ===== 顯示目前第幾張（例如 3 / 12） ===== */
 .counter {
-  margin-bottom: 15px;
-  font-size: 18px;
-  opacity: 0.8;
+  margin-bottom: 15px;            /* 下方留白 */
+  font-size: 18px;                /* 字級 */
+  opacity: 0.8;                   /* 半透明 */
 }
 
-/*=============================
-  輪播最外層
-=============================*/
+/* ===== 主要輪播外層 ===== */
 .carousel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
+  display: flex;                  /* 橫向排列 */
+  align-items: center;            /* 垂直置中 */
+  gap: 10px;                      /* 元素間距 */
+  position: relative;             /* 讓按鈕在內部能絕對定位 */
 }
 
-/*=============================
-  按鈕
-=============================*/
+/* ===== 左右按鈕 ===== */
 .btn {
-  background: #f2f2f2;
-  border: 2px solid #b88dd6;
-  color: #b88dd6;
-  font-size: 26px;
-  padding: 5px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  z-index: 5;
+  background: #f2f2f2;            /* 淺灰背景 */
+  border: 2px solid #b88dd6;      /* 紫色邊框 */
+  color: #b88dd6;                 /* 紫色圖示 */
+  font-size: 26px;                /* 箭頭文字大小 */
+  padding: 5px 12px;              /* 內距 */
+  border-radius: 6px;             /* 圓角 */
+  cursor: pointer;                /* 滑鼠變成手指 */
+  z-index: 5;                     /* 領先於圖片顯示 */
 }
 
 .btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0,0,0,0.1);     /* hover 顯示稍暗底色 */
 }
 
-/* 禁用按鈕 */
+/* ===== 禁用按鈕變灰不可按 ===== */
 button:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+  opacity: 0.3;                   /* 半透明 */
+  cursor: not-allowed;            /* 不可按滑鼠樣式 */
 }
 
-/*=============================
-  Lightbox
-=============================*/
+/* ===== Lightbox 外層（點大圖時的背景半透明層） ===== */
 #lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
+  display: none;                  /* 預設隱藏 */
+  position: fixed;                /* 固定覆蓋整頁 */
+  inset: 0;                       /* top/right/bottom/left = 0 */
+  background: rgba(255,255,255,0.6); /* 白色透明背景 */
+  justify-content: center;        /* 水平置中大圖 */
+  align-items: center;            /* 垂直置中大圖 */
+  z-index: 99;                    /* 最上層 */
 }
 
+/* ===== Lightbox 裡的大圖 ===== */
 #lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
+  max-width: 90%;                 /* 最寬不可超過畫面 90% */
+  max-height: 90%;                /* 最高不可超過畫面 90% */
+  border-radius: 12px;            /* 圓角 */
 }
 
-/*=============================
-  手機版（兩張一行 / 共兩行）
-=============================*/
+/* ===== 手機版（寬度 768px 以下） ===== */
 @media (max-width: 768px) {
 
-  /* 讓按鈕固定在左右 */
+  /* ===== 手機版輪播外層 ===== */
   .carousel {
-    padding: 0 50px; /* 預留左右按鈕空間 */
+    padding: 0 50px;              /* 左右留 50px 放按鈕 */
   }
 
+  /* ===== 左按鈕固定在左中央 ===== */
   #prev {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+    position: absolute;           /* 絕對定位 */
+    left: 0;                      /* 靠左 */
+    top: 50%;                     /* 垂直置中 */
+    transform: translateY(-50%);  /* 修正真正置中 */
+    z-index: 10;                  /* 在圖片上方 */
   }
 
+  /* ===== 右按鈕固定在右中央 ===== */
   #next {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+    position: absolute;           /* 絕對定位 */
+    right: 0;                     /* 靠右 */
+    top: 50%;                     /* 垂直置中 */
+    transform: translateY(-50%);  /* 修正真正置中 */
+    z-index: 10;                  /* 在圖片上方 */
   }
 
-  /* 手機版每排 2 張 */
+  /* ===== 手機版每行顯示 2 張 ===== */
   .item {
-    width: calc(50% - 8px);
+    width: calc(50% - 8px);       /* 兩張並排，中間留縫隙 */
   }
 
+  /* ===== 圖片自動依比例縮放 ===== */
   .item img {
-    width: 100%;
-    height: auto; /* 讓圖片不被硬拉伸 */
+    width: 100%;                  /* 填滿 item */
+    height: auto;                 /* 高度自動，不變形 */
   }
 }
