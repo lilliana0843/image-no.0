@@ -92,19 +92,24 @@ button:disabled {
   border-radius: 12px;
 }
 
-/*=============================
-  手機版適配（小於 768px）
-=============================*/
+/*=====================================
+  手機版適配（保持兩行，不縱向配置）
+=====================================*/
 @media (max-width: 768px) {
 
-  body {
-    padding-top: 20px;
+  /* 外層保持橫向排列 */
+  .carousel {
+    flex-direction: row;
+    flex-wrap: wrap; /* ⭐ 讓它能換行 */
+    justify-content: center;
+    gap: 8px;
+    width: 95%;
   }
 
-  /* 兩行 → 手機改成單行顯示 (方便滑動與閱讀) */
+  /* 一行顯示五張 → 手機縮小比例 */
   .item {
-    width: 45%;
-    margin-bottom: 15px;
+    width: calc(20% - 6px); /* ⭐ 五等分 */
+    display: flex;
   }
 
   .item img {
@@ -112,24 +117,18 @@ button:disabled {
     height: auto;
   }
 
-  /* 讓外層排列方式更適合手機 */
-  .carousel {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  /* 上下按鈕變大一點（手指好按） */
+  /* 上下移動按鈕 → 保持左右位置，不變 */
   .btn {
-    font-size: 32px;
-    padding: 10px 16px;
+    font-size: 28px;
+    padding: 8px 14px;
   }
 
-  /* 計數器稍微大一些 */
+  /* 計數器略縮小 */
   .counter {
-    font-size: 20px;
+    font-size: 16px;
   }
 
-  /* Lightbox 更貼合手機 */
+  /* Lightbox 手機優化 */
   #lightbox img {
     max-width: 95%;
     max-height: 85%;
