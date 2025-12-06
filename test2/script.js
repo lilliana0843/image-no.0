@@ -1,39 +1,79 @@
-// 取得輪播相關元素
-const carousel = document.querySelector('.carousel');
-const pages = document.querySelectorAll('.carousel-page');
+// 取得 DOM
+const items = Array.from(document.querySelectorAll(".item"));
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const counter = document.querySelector(".counter");
 
-const arrowLeft = document.querySelector('.carousel-arrow.left');
-const arrowRight = document.querySelector('.carousel-arrow.right');
+// 一頁顯示 5×2 = 10 張
+const pageSize = 10;
+let pageIndex = 0;
 
-// 當前頁面
-let currentPage = 0;
+// ==============================
+// 重新渲染
+// ==============================
+function renderCarousel() {
+  items.forEach(item => (item.style.display = "none"));
 
-// 計算總頁數（動態，不管你未來放幾張都會自動算）
-const totalPages = pages.length;
+  const start = pageIndex * pageSize;
+  const end = start + pageSize;
 
-// 更新輪播位置
-function updateCarousel() {
-  const offset = -currentPage * 100; // 每頁剛好 100% 寬
-  carousel.style.transform = `translateX(${offset}%)`;
+  const visible = items.slice(start, end);
+
+  visible.forEach(item => {
+    item.style.display = "flex";
+  });
+
+  updateCounter();
+  updateButtons();
 }
 
-// 點擊左箭頭
-arrowLeft.addEventListener('click', () => {
-  if (currentPage > 0) {
-    currentPage--;
-    updateCarousel();
+// Counter 顯示
+function updateCounter() {
+  counter.textContent = `${pageIndex + 1} / ${Math.ceil(items.length / pageSize)}`;
+}
+
+// 按鈕狀態
+function updateButtons() {
+  prevBtn.disabled = pageIndex === 0;
+  nextBtn.disabled = pageIndex >= Math.ceil(items.length / pageSize) - 1;
+
+  prevBtn.classList.toggle("disabled", prevBtn.disabled);
+  nextBtn.classList.toggle("disabled", nextBtn.disabled);
+}
+
+// 上（上一頁）
+prevBtn.addEventListener("click", () => {
+  if (pageIndex > 0) {
+    pageIndex--;
+    renderCarousel();
   }
 });
 
-// 點擊右箭頭
-arrowRight.addEventListener('click', () => {
-  if (currentPage < totalPages - 1) {
-    currentPage++;
-    updateCarousel();
+// 下（下一頁）
+nextBtn.addEventListener("click", () => {
+  if (pageIndex < Math.ceil(items.length / pageSize) - 1) {
+    pageIndex++;
+    renderCarousel();
   }
 });
 
-// 當視窗大小改變時（例如從橫向→直向），強制重新定位避免跑版
-window.addEventListener('resize', () => {
-  updateCarousel();
+// ==============================
+// Lightbox 點圖放大
+// ==============================
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+items.forEach(item => {
+  item.addEventListener("click", () => {
+    const imgURL = item.querySelector("img").dataset.full;
+    lightboxImg.src = imgURL;
+    lightbox.style.display = "flex";
+  });
 });
+
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+
+// 初始化
+renderCarousel();
