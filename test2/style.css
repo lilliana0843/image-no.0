@@ -105,40 +105,39 @@ button:disabled {
   border-radius: 12px;            /* 圓角 */
 }
 
-/* ===== 手機版（寬度 768px 以下） ===== */
+/* ===== 手機版版面修正 ===== */
 @media (max-width: 768px) {
 
-  /* ===== 手機版輪播外層 ===== */
+  /* 手機版主容器預留按鈕位置 */
   .carousel {
-    padding: 0 50px;              /* 左右留 50px 放按鈕 */
+    padding: 0 50px;
+    flex-wrap: wrap;               /* 允許換行 → 才能 2×2 */
+    justify-content: center;       /* 中置對齊 */
   }
 
-  /* ===== 左按鈕固定在左中央 ===== */
-  #prev {
-    position: absolute;           /* 絕對定位 */
-    left: 0;                      /* 靠左 */
-    top: 50%;                     /* 垂直置中 */
-    transform: translateY(-50%);  /* 修正真正置中 */
-    z-index: 10;                  /* 在圖片上方 */
+  /* 左右按鈕固定在畫面中央 */
+  #prev, #next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
   }
 
-  /* ===== 右按鈕固定在右中央 ===== */
-  #next {
-    position: absolute;           /* 絕對定位 */
-    right: 0;                     /* 靠右 */
-    top: 50%;                     /* 垂直置中 */
-    transform: translateY(-50%);  /* 修正真正置中 */
-    z-index: 10;                  /* 在圖片上方 */
-  }
+  #prev { left: 0; }
+  #next { right: 0; }
 
-  /* ===== 手機版每行顯示 2 張 ===== */
+  /* ⭐ 手機版每行兩張 */
   .item {
-    width: calc(50% - 8px);       /* 兩張並排，中間留縫隙 */
+    width: calc(50% - 12px);       /* 兩張並排，留點間距 */
+    display: flex !important;      /* 強制顯示（由 JS 控制顯示哪 4 張） */
   }
 
-  /* ===== 圖片自動依比例縮放 ===== */
+  /* ⭐ 保持圖片比例一致（縮圖統一大小） */
   .item img {
-    width: 100%;                  /* 填滿 item */
-    height: auto;                 /* 高度自動，不變形 */
+    width: 100%;                   /* 寬度填滿 */
+    height: 200px;                 /* ⭐ 手機版統一高度 */
+    object-fit: cover;             /* 裁切填滿，不變形 */
+    border-radius: 8px;
   }
 }
+
