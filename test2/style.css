@@ -9,62 +9,52 @@ body {
   padding-top: 30px;
 }
 
-/*=============================
-  Grid：一次 2 行 × 5 張
-=============================*/
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 200px);
-  grid-template-rows: repeat(2, 300px);
-  gap: 15px;
+/* 計數器 */
+.counter {
+  margin-bottom: 15px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-/*=============================
-  Item
-=============================*/
-.item {
-  width: 200px;
-  height: 300px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: 0.25s ease;
-}
-
-/* hover */
-.item:hover img {
-  transform: scale(1.05);
-}
-
-/* not active */
-.item:not(.active) img {
-  opacity: 0.75;
-}
-
-/* active */
-.item.active img {
-  opacity: 1;
-  transform: scale(1.05);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-}
-
-/*=============================
-  上下按鈕
-=============================*/
+/* 輪播外層 */
 .carousel {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* 5×2 網格 */
+.grid-wrapper {
+  width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 12px 12px;
+}
+
+/* item */
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.item img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: 0.25s ease;
+}
+
+/*** hover 效果 ***/
+.item:hover img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* 按鈕 */
 .btn {
   background: #f2f2f2;
   border: 2px solid #b88dd6;
@@ -79,14 +69,13 @@ body {
   background: rgba(0,0,0,0.1);
 }
 
+/* 禁用按鈕 */
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-/*=============================
-  Lightbox
-=============================*/
+/* Lightbox */
 #lightbox {
   display: none;
   position: fixed;
