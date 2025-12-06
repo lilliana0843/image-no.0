@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <!-- 設定網頁編碼，避免中文亂碼 -->
+    <meta charset="UTF-8">
+
+    <!-- RWD：讓網頁在手機上也能正常縮放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 網頁標題（會顯示在瀏覽器的分頁上） -->
+    <title>阿美委託展示</title>
+
+    <!-- 內部 CSS，用來設定最基本的樣式 -->
+    <style>
+        /* 整個網頁的基本樣式 */
+        body {
+            font-family: Arial, sans-serif;  /* 字體 */
+            text-align: center;              /* 內容置中 */
+            padding: 50px;                   /* 頁面留白 */
+            background: #f9f9f9;             /* 背景顏色 */
+        }
+
+        /* 標題 H1 樣式 */
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* 超連結（按鈕）的基本樣式 */
+        a {
+            display: inline-block;           /* 變成可調寬高的區塊 */
+            margin: 10px;                    /* 外距 */
+            padding: 10px 20px;              /* 內距 */
+            background: #4a90e2;             /* 按鈕背景色 */
+            color: white;                    /* 文字白色 */
+            border-radius: 8px;              /* 圓角 */
+            text-decoration: none;           /* 移除底線 */
+        }
+
+        /* 滑鼠移過超連結時的樣式 */
+        a:hover {
+            background: #3578c4;             /* 懸停時變深 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 主標題 -->
+    <h1>阿美委託圖展示區</h1>
+
+   
+
+    <!-- 導向不同資料夾的按鈕 -->
+    <!-- 若你沒有這些資料夾，可以之後新增 -->
+    <a href="test1/index.html">前往輪播(橫)</a>
+    <a href="test2/index.html">前往輪播(直)</a>
+
+</body>
+</html>
