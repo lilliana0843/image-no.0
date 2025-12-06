@@ -117,46 +117,28 @@ button:disabled {
   border-radius: 12px;
 }
 
-/*=============================
-  手機版適配（小於 768px）
-=============================*/
-@media (max-width: 768px) {
-
-  body {
-    padding-top: 20px;
-  }
-
-  /* 兩行 → 手機改成單行顯示 (方便滑動與閱讀) */
-  .item {
-    width: 45%;
-    margin-bottom: 15px;
+/* ===========================
+   響應（RWD）建議
+   - 手機畫面：縮小圖片、減少放大倍率、調整按鈕位置
+   =========================== */
+@media (max-width: 600px) {
+  .carousel {
+    width: 95%;
+    gap: 12px;
   }
 
   .item img {
-    width: 100%;
-    height: auto;
+    width: 120px;     /* 手機圖片寬度 */
+    height: 80px;     /* 手機圖片高度 */
   }
 
-  /* 讓外層排列方式更適合手機 */
-  .carousel {
-    flex-direction: column;
-    gap: 8px;
+  .item.active {
+    transform: scale(1.15);   /* 手機上不要放太大，避免超出畫面 */
   }
 
-  /* 上下按鈕變大一點（手指好按） */
-  .btn {
-    font-size: 32px;
-    padding: 10px 16px;
-  }
+  #prev { left: -40px; }
+  #next { right: -40px; }
 
-  /* 計數器稍微大一些 */
-  .counter {
-    font-size: 20px;
-  }
-
-  /* Lightbox 更貼合手機 */
-  #lightbox img {
-    max-width: 95%;
-    max-height: 85%;
-  }
+  .caption { font-size: 12px; }
 }
+
