@@ -24,7 +24,7 @@ function renderCarousel() {
 
     // 保留原本 active，不會每次被清掉
     if (!item.classList.contains("active")) {
-      if (i === 1) {
+      if (i === 2) {
         item.classList.add("active");
       }
     }
