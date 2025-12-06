@@ -91,3 +91,48 @@ button:disabled {
   max-height: 90%;
   border-radius: 12px;
 }
+
+/*=============================
+  手機版適配（小於 768px）
+=============================*/
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 20px;
+  }
+
+  /* 兩行 → 手機改成單行顯示 (方便滑動與閱讀) */
+  .item {
+    width: 45%;
+    margin-bottom: 15px;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* 讓外層排列方式更適合手機 */
+  .carousel {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* 上下按鈕變大一點（手指好按） */
+  .btn {
+    font-size: 32px;
+    padding: 10px 16px;
+  }
+
+  /* 計數器稍微大一些 */
+  .counter {
+    font-size: 20px;
+  }
+
+  /* Lightbox 更貼合手機 */
+  #lightbox img {
+    max-width: 95%;
+    max-height: 85%;
+  }
+}
+
