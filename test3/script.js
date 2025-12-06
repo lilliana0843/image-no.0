@@ -11,16 +11,19 @@ let pageIndex = 0;
    計算「一頁顯示幾個」
    =========================== */
 function updatePageSize() {
-  const gridWidth = document.querySelector(".grid-wrapper").clientWidth;
+  const grid = document.querySelector(".grid-wrapper");
+  const gridWidth = grid.clientWidth;
 
-  // 每張最小寬 180px（跟 CSS minmax 一致）
-  const columns = Math.floor(gridWidth / 180);
+  // 單個卡片的最小寬度 (和 CSS 一致)
+  const minWidth = 180;
 
-  const rows = 2; // 你想要一頁顯示 2 行
+  // 計算能塞幾欄（手機可能變成 1 欄、2 欄）
+  const columns = Math.max(1, Math.floor(gridWidth / minWidth));
+
+  // 想要固定顯示 2 行
+  const rows = 2;
 
   pageSize = columns * rows;
-
-  if (pageSize < 1) pageSize = 1;
 }
 
 /* ===========================
@@ -29,7 +32,6 @@ function updatePageSize() {
 function renderCarousel() {
   updatePageSize();
 
-  // 隱藏全部
   items.forEach(item => (item.style.display = "none"));
 
   const start = pageIndex * pageSize;
@@ -56,21 +58,17 @@ function updateButtons() {
 
 /* 上一頁 */
 prevBtn.addEventListener("click", () => {
-  if (pageIndex > 0) {
-    pageIndex--;
-    renderCarousel();
-  }
+  pageIndex--;
+  renderCarousel();
 });
 
 /* 下一頁 */
 nextBtn.addEventListener("click", () => {
-  if (pageIndex < Math.ceil(items.length / pageSize) - 1) {
-    pageIndex++;
-    renderCarousel();
-  }
+  pageIndex++;
+  renderCarousel();
 });
 
-/* lightbox */
+/* Lightbox */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
@@ -86,10 +84,8 @@ lightbox.addEventListener("click", () => {
   lightbox.style.display = "none";
 });
 
-/* 視窗大小變化 → 重新計算 */
-window.addEventListener("resize", () => {
-  renderCarousel();
-});
+/* 重新計算 RWD */
+window.addEventListener("resize", renderCarousel);
 
 /* 初始化 */
 renderCarousel();
