@@ -36,7 +36,7 @@ body {
 .carousel-page {
   min-width: 100%; /* 每頁寬度 = 100% 父層 */
   display: grid; /* 使用 grid 排版圖片 */
-  grid-template-columns: repeat(4, 1fr); /* 電腦版：一行四張 */
+  grid-template-columns: repeat(5, 1fr); /* 電腦版：一行四張 */
   gap: 10px; /* 圖片間距 */
   box-sizing: border-box; /* 含 padding 計算 */
 }
