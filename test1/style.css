@@ -129,7 +129,7 @@ button:disabled {
 
   .item img {
     width: 120px;     /* 手機圖片寬度 */
-    height: 80px;     /* 手機圖片高度 */
+    height: 180px;     /* 手機圖片高度 */
   }
 
   .item.active {
