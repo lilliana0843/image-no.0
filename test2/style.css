@@ -1,143 +1,115 @@
-/* ===== 整體頁面設定 ===== */
+/*===============================
+  基本設定
+================================*/
 body {
-  background: #ffffff;            /* 白色背景 */
-  color: #000;                    /* 黑色文字 */
-  font-family: sans-serif;        /* 無襯線字體 */
-  display: flex;                  /* 使用 flex 排版 */
-  flex-direction: column;         /* 元素垂直排列 */
-  align-items: center;            /* 水平置中內容 */
-  margin: 0;                      /* 移除預設 margin */
-  padding-top: 30px;              /* 頂部留白避免貼邊 */
+  background: #ffffff; /* 背景色為白 */
+  color: #000; /* 字體顏色黑色 */
+  font-family: sans-serif; /* 基本文字字體 */
+  display: flex; /* 使用 flex 排版 */
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 置中對齊 */
+  margin: 0; /* 清除預設外距 */
+  padding-top: 30px; /* 頂部留白 */
 }
 
-/* ===== 滑鼠 hover 讓圖片微放大（不影響 active 狀態） ===== */
-.item:hover img {
-  transform: scale(1.05);         /* 放大 1.05 倍 */
-  filter: none;                   /* 移除任何濾鏡效果 */
-  transition: 0.2s;               /* 動畫時間 0.2 秒 */
+/*===============================
+  輪播區域外層
+================================*/
+.carousel-container {
+  position: relative; /* 讓箭頭可以絕對定位 */
+  width: 80%; /* 預設寬度 */
+  max-width: 900px; /* 最大寬度限制 */
+  overflow: hidden; /* 隱藏超出部分 */
 }
 
-/* ===== 非 active 狀態的圖片透明度調低 ===== */
-.item:not(.active) img {
-  opacity: 0.75;                  /* 透明度 75% */
-  transition: 0.25s;              /* 過渡動畫 */
-}
-
-/* ===== active（點擊後選中）圖片變亮＋放大 ===== */
-.item.active img {
-  opacity: 1;                     /* 完全不透明 */
-  transform: scale(1.05);         /* 放大 */
-  filter: none;                   /* 保持清晰無濾鏡 */
-  box-shadow: 0 0 5px rgba(0,0,0,0.25); /* 周圍加微陰影 */
-  transition: 0.25s;              /* 動畫時間 */
-}
-
-/* ===== 每個 item（包含圖片與文字） ===== */
-.item {
-  display: none;                  /* 預設隱藏（JS 控制顯示） */
-  flex-direction: column;         /* 圖片與文字上下排列 */
-  align-items: center;            /* 水平置中 */
-  width: 200px;                   /* 每個 item 寬度 */
-  cursor: pointer;                /* 滑過變成可點擊 */
-}
-
-/* ===== 圖片本體設定 ===== */
-.item img {
-  width: 200px;                   /* 圖片寬度 */
-  height: 300px;                  /* 圖片高度 */
-  object-fit: cover;              /* 保持比例裁切填滿 */
-  border-radius: 8px;             /* 圓角 */
-  transition: 0.25s ease;         /* 動畫 */
-}
-
-/* ===== 顯示目前第幾張（例如 3 / 12） ===== */
-.counter {
-  margin-bottom: 15px;            /* 下方留白 */
-  font-size: 18px;                /* 字級 */
-  opacity: 0.8;                   /* 半透明 */
-}
-
-/* ===== 主要輪播外層 ===== */
+/*===============================
+  每一頁的容器（水平滑動）
+================================*/
 .carousel {
-  display: flex;                  /* 橫向排列 */
-  align-items: center;            /* 垂直置中 */
-  gap: 10px;                      /* 元素間距 */
-  position: relative;             /* 讓按鈕在內部能絕對定位 */
+  display: flex; /* 左右排列所有頁面 */
+  transition: transform 0.4s ease; /* 滑動動畫 */
 }
 
-/* ===== 左右按鈕 ===== */
-.btn {
-  background: #f2f2f2;            /* 淺灰背景 */
-  border: 2px solid #b88dd6;      /* 紫色邊框 */
-  color: #b88dd6;                 /* 紫色圖示 */
-  font-size: 26px;                /* 箭頭文字大小 */
-  padding: 5px 12px;              /* 內距 */
-  border-radius: 6px;             /* 圓角 */
-  cursor: pointer;                /* 滑鼠變成手指 */
-  z-index: 5;                     /* 領先於圖片顯示 */
+/*===============================
+  單一頁
+================================*/
+.carousel-page {
+  min-width: 100%; /* 每頁寬度 = 100% 父層 */
+  display: grid; /* 使用 grid 排版圖片 */
+  grid-template-columns: repeat(4, 1fr); /* 電腦版：一行四張 */
+  gap: 10px; /* 圖片間距 */
+  box-sizing: border-box; /* 含 padding 計算 */
 }
 
-.btn:hover {
-  background: rgba(0,0,0,0.1);     /* hover 顯示稍暗底色 */
+/*===============================
+  圖片縮圖（保持一致比例）
+================================*/
+.carousel-page img {
+  width: 100%; /* 填滿格子 */
+  aspect-ratio: 1 / 1; /* 強制成正方形，比例一致 */
+  object-fit: cover; /* 溢出裁切 */
+  border-radius: 6px; /* 圓角 */
 }
 
-/* ===== 禁用按鈕變灰不可按 ===== */
-button:disabled {
-  opacity: 0.3;                   /* 半透明 */
-  cursor: not-allowed;            /* 不可按滑鼠樣式 */
+/*===============================
+  左右箭頭
+================================*/
+.carousel-arrow {
+  position: absolute; /* 固定在輪播框內 */
+  top: 50%; /* 垂直置中 */
+  transform: translateY(-50%); /* 精準置中 */
+  background: rgba(255, 255, 255, 0.8); /* 半透明白底 */
+  border: 1px solid #ddd; /* 邊框 */
+  padding: 10px 14px; /* 內距 */
+  cursor: pointer; /* 滑鼠變成可點 */
+  user-select: none; /* 禁止選取 */
+  border-radius: 50%; /* 圓形按鈕 */
+  font-size: 18px; /* 字體大小 */
+  z-index: 10; /* 在最上層 */
 }
 
-/* ===== Lightbox 外層（點大圖時的背景半透明層） ===== */
-#lightbox {
-  display: none;                  /* 預設隱藏 */
-  position: fixed;                /* 固定覆蓋整頁 */
-  inset: 0;                       /* top/right/bottom/left = 0 */
-  background: rgba(255,255,255,0.6); /* 白色透明背景 */
-  justify-content: center;        /* 水平置中大圖 */
-  align-items: center;            /* 垂直置中大圖 */
-  z-index: 99;                    /* 最上層 */
+/* 左箭頭 */
+.carousel-arrow.left {
+  left: -45px; /* 固定在左側 */
 }
 
-/* ===== Lightbox 裡的大圖 ===== */
-#lightbox img {
-  max-width: 90%;                 /* 最寬不可超過畫面 90% */
-  max-height: 90%;                /* 最高不可超過畫面 90% */
-  border-radius: 12px;            /* 圓角 */
+/* 右箭頭 */
+.carousel-arrow.right {
+  right: -45px; /* 固定在右側 */
 }
 
-/* ===== 手機版版面修正 ===== */
+/*===============================
+      手機版（顯示兩張 × 兩行）
+================================*/
 @media (max-width: 768px) {
 
-  /* 手機版主容器預留按鈕位置 */
-  .carousel {
-    padding: 0 50px;
-    flex-wrap: wrap;               /* 允許換行 → 才能 2×2 */
-    justify-content: center;       /* 中置對齊 */
+  .carousel-container {
+    width: 95%; /* 更寬 */
   }
 
-  /* 左右按鈕固定在畫面中央 */
-  #prev, #next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+  .carousel-page {
+    grid-template-columns: repeat(2, 1fr); /* 一行兩張 */
+    grid-template-rows: repeat(2, 1fr); /* 兩行 */
   }
 
-  #prev { left: 0; }
-  #next { right: 0; }
-
-  /* ⭐ 手機版每行兩張 */
-  .item {
-    width: calc(50% - 12px);       /* 兩張並排，留點間距 */
-    display: flex !important;      /* 強制顯示（由 JS 控制顯示哪 4 張） */
+  .carousel-arrow.left {
+    left: -20px; /* 手機版箭頭更加貼近輪播框 */
   }
 
-  /* ⭐ 保持圖片比例一致（縮圖統一大小） */
-  .item img {
-    width: 100%;                   /* 寬度填滿 */
-    height: 200px;                 /* ⭐ 手機版統一高度 */
-    object-fit: cover;             /* 裁切填滿，不變形 */
-    border-radius: 8px;
+  .carousel-arrow.right {
+    right: -20px;
   }
 }
 
+/*===============================
+  超小手機（避免太擠）
+================================*/
+@media (max-width: 480px) {
+  .carousel-arrow.left {
+    left: -10px;
+  }
+
+  .carousel-arrow.right {
+    right: -10px;
+  }
+}
