@@ -9,37 +9,46 @@ body {
   padding-top: 30px;
 }
 
-/* 計數器 */
-.counter {
-  margin-bottom: 15px;
-  font-size: 18px;
-  opacity: 0.8;
+/*=============================
+  滑鼠 hover（不變 active）
+=============================*/
+.item:hover img {
+  transform: scale(1.05);
+  filter: none;
+  transition: 0.2s;
 }
 
-/* 輪播外層 */
-.carousel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/*=============================
+  未 active
+=============================*/
+.item:not(.active) img {
+  opacity: 0.75;
+  transition: 0.25s;
 }
 
-/* 5×2 網格 */
-.grid-wrapper {
-  width: 1100px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 12px 12px;
+/*=============================
+  active（點一下）
+=============================*/
+.item.active img {
+  opacity: 1;
+  transform: scale(1.05);
+  filter: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  transition: 0.25s;
 }
 
-/* item */
+/*=============================
+  項目本體
+=============================*/
 .item {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
+  width: 200px;
   cursor: pointer;
 }
 
+/* 圖片本體 */
 .item img {
   width: 200px;
   height: 300px;
@@ -48,13 +57,28 @@ body {
   transition: 0.25s ease;
 }
 
-/*** hover 效果 ***/
-.item:hover img {
-  transform: scale(1.05);
-  opacity: 1;
+/*=============================
+  計數器
+=============================*/
+.counter {
+  margin-bottom: 15px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-/* 按鈕 */
+/*=============================
+  輪播最外層
+=============================*/
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/*=============================
+  按鈕
+=============================*/
 .btn {
   background: #f2f2f2;
   border: 2px solid #b88dd6;
@@ -63,10 +87,11 @@ body {
   padding: 5px 12px;
   border-radius: 6px;
   cursor: pointer;
+  z-index: 5;
 }
 
 .btn:hover {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* 禁用按鈕 */
@@ -75,12 +100,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Lightbox */
+/*=============================
+  Lightbox
+=============================*/
 #lightbox {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   justify-content: center;
   align-items: center;
   z-index: 99;
@@ -92,46 +119,39 @@ button:disabled {
   border-radius: 12px;
 }
 
-/*=====================================
-  手機版（小於 768px）→ 一行兩張 × 兩行
-=====================================*/
+/*=============================
+  手機版（兩張一行 / 共兩行）
+=============================*/
 @media (max-width: 768px) {
 
-  /* 外層保持橫向、允許換行 */
+  /* 讓按鈕固定在左右 */
   .carousel {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    width: 95%;
+    padding: 0 50px; /* 預留左右按鈕空間 */
   }
 
-  /* 手機版 → 每行顯示兩張 */
+  #prev {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+
+  #next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+
+  /* 手機版每排 2 張 */
   .item {
-    width: calc(50% - 8px); /* ⭐ 讓每行兩張 */
-    display: flex;
+    width: calc(50% - 8px);
   }
 
   .item img {
     width: 100%;
-    height: auto;
-  }
-
-  /* 按鈕保持左右位置 */
-  .btn {
-    font-size: 30px;
-    padding: 10px 16px;
-  }
-
-  /* 計數器微調 */
-  .counter {
-    font-size: 18px;
-  }
-
-  /* Lightbox 更貼合手機 */
-  #lightbox img {
-    max-width: 95%;
-    max-height: 85%;
+    height: auto; /* 讓圖片不被硬拉伸 */
   }
 }
-
