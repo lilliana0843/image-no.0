@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview Carousel</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 計數器 -->
+  <div class="counter">1 / 12</div>
+
+  <!-- 主要輪播（左右位置不變，但內容改成上下切頁） -->
+  <div class="carousel">
+
+    <!-- 上一頁（本質是往上） -->
+    <button id="prev" class="btn">〈</button>
+
+    <!-- 顯示區：10 張（5x2） -->
+    <div class="grid-wrapper">
+      <!-- 你的 items（不用 active） -->
+      <div class="item">
+        <img src="../img/all/毛毛-1.png" data-full="../img/all/毛毛-1.png" />
+        <p class="caption">毛毛</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/毛毛-2.jpg" data-full="../img/all/毛毛-2.jpg" />
+        <p class="caption">毛毛</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/毛毛-6.png" data-full="../img/all/毛毛-6.png" />
+        <p class="caption">毛毛</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/毛毛-8.jpg" data-full="../img/all/毛毛-8.jpg" />
+        <p class="caption">毛毛</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-1.png" data-full="../img/all/鉛筆-1.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-2.png" data-full="../img/all/鉛筆-2.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-3.png" data-full="../img/all/鉛筆-3.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-4.png" data-full="../img/all/鉛筆-4.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-5.png" data-full="../img/all/鉛筆-5.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-6.png" data-full="../img/all/鉛筆-6.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-7.png" data-full="../img/all/鉛筆-7.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/鉛筆-8.png" data-full="../img/all/鉛筆-8.png" />
+        <p class="caption">鉛筆</p>
+      </div>
+    </div>
+
+    <!-- 下一頁（本質是往下） -->
+    <button id="next" class="btn">〉</button>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
