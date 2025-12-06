@@ -1,115 +1,93 @@
-/*===============================
-  基本設定
-================================*/
 body {
-  background: #ffffff; /* 背景色為白 */
-  color: #000; /* 字體顏色黑色 */
-  font-family: sans-serif; /* 基本文字字體 */
-  display: flex; /* 使用 flex 排版 */
-  flex-direction: column; /* 垂直排列 */
-  align-items: center; /* 置中對齊 */
-  margin: 0; /* 清除預設外距 */
-  padding-top: 30px; /* 頂部留白 */
+  background: #ffffff;
+  color: #000;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding-top: 30px;
 }
 
-/*===============================
-  輪播區域外層
-================================*/
-.carousel-container {
-  position: relative; /* 讓箭頭可以絕對定位 */
-  width: 80%; /* 預設寬度 */
-  max-width: 900px; /* 最大寬度限制 */
-  overflow: hidden; /* 隱藏超出部分 */
+/* 計數器 */
+.counter {
+  margin-bottom: 15px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-/*===============================
-  每一頁的容器（水平滑動）
-================================*/
+/* 輪播外層 */
 .carousel {
-  display: flex; /* 左右排列所有頁面 */
-  transition: transform 0.4s ease; /* 滑動動畫 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/*===============================
-  單一頁
-================================*/
-.carousel-page {
-  min-width: 100%; /* 每頁寬度 = 100% 父層 */
-  display: grid; /* 使用 grid 排版圖片 */
-  grid-template-columns: repeat(5, 1fr); /* 電腦版：一行四張 */
-  gap: 10px; /* 圖片間距 */
-  box-sizing: border-box; /* 含 padding 計算 */
+/* 5×2 網格 */
+.grid-wrapper {
+  width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 12px 12px;
 }
 
-/*===============================
-  圖片縮圖（保持一致比例）
-================================*/
-.carousel-page img {
-  width: 100%; /* 填滿格子 */
-  aspect-ratio: 1 / 1; /* 強制成正方形，比例一致 */
-  object-fit: cover; /* 溢出裁切 */
-  border-radius: 6px; /* 圓角 */
+/* item */
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
-/*===============================
-  左右箭頭
-================================*/
-.carousel-arrow {
-  position: absolute; /* 固定在輪播框內 */
-  top: 50%; /* 垂直置中 */
-  transform: translateY(-50%); /* 精準置中 */
-  background: rgba(255, 255, 255, 0.8); /* 半透明白底 */
-  border: 1px solid #ddd; /* 邊框 */
-  padding: 10px 14px; /* 內距 */
-  cursor: pointer; /* 滑鼠變成可點 */
-  user-select: none; /* 禁止選取 */
-  border-radius: 50%; /* 圓形按鈕 */
-  font-size: 18px; /* 字體大小 */
-  z-index: 10; /* 在最上層 */
+.item img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: 0.25s ease;
 }
 
-/* 左箭頭 */
-.carousel-arrow.left {
-  left: -45px; /* 固定在左側 */
+/*** hover 效果 ***/
+.item:hover img {
+  transform: scale(1.05);
+  opacity: 1;
 }
 
-/* 右箭頭 */
-.carousel-arrow.right {
-  right: -45px; /* 固定在右側 */
+/* 按鈕 */
+.btn {
+  background: #f2f2f2;
+  border: 2px solid #b88dd6;
+  color: #b88dd6;
+  font-size: 26px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-/*===============================
-      手機版（顯示兩張 × 兩行）
-================================*/
-@media (max-width: 768px) {
-
-  .carousel-container {
-    width: 95%; /* 更寬 */
-  }
-
-  .carousel-page {
-    grid-template-columns: repeat(2, 1fr); /* 一行兩張 */
-    grid-template-rows: repeat(2, 1fr); /* 兩行 */
-  }
-
-  .carousel-arrow.left {
-    left: -20px; /* 手機版箭頭更加貼近輪播框 */
-  }
-
-  .carousel-arrow.right {
-    right: -20px;
-  }
+.btn:hover {
+  background: rgba(0,0,0,0.1);
 }
 
-/*===============================
-  超小手機（避免太擠）
-================================*/
-@media (max-width: 480px) {
-  .carousel-arrow.left {
-    left: -10px;
-  }
+/* 禁用按鈕 */
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 
-  .carousel-arrow.right {
-    right: -10px;
-  }
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
 }
