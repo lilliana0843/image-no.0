@@ -5,7 +5,7 @@ const nextBtn = document.getElementById("next");
 const counter = document.querySelector(".counter");
 
 // 一頁顯示 5×2 = 10 張
-const pageSize = 10;
+const showCount = window.innerWidth <= 768 ? 4 : 10;
 let pageIndex = 0;
 
 // ==============================
