@@ -93,22 +93,22 @@ button:disabled {
 }
 
 /*=====================================
-  手機版適配（保持兩行，不縱向配置）
+  手機版（小於 768px）→ 一行兩張 × 兩行
 =====================================*/
 @media (max-width: 768px) {
 
-  /* 外層保持橫向排列 */
+  /* 外層保持橫向、允許換行 */
   .carousel {
     flex-direction: row;
-    flex-wrap: wrap; /* ⭐ 讓它能換行 */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     width: 95%;
   }
 
-  /* 一行顯示五張 → 手機縮小比例 */
+  /* 手機版 → 每行顯示兩張 */
   .item {
-    width: calc(50% - 6px); /* ⭐ 五等分 */
+    width: calc(50% - 8px); /* ⭐ 讓每行兩張 */
     display: flex;
   }
 
@@ -117,18 +117,18 @@ button:disabled {
     height: auto;
   }
 
-  /* 上下移動按鈕 → 保持左右位置，不變 */
+  /* 按鈕保持左右位置 */
   .btn {
-    font-size: 28px;
-    padding: 8px 14px;
+    font-size: 30px;
+    padding: 10px 16px;
   }
 
-  /* 計數器略縮小 */
+  /* 計數器微調 */
   .counter {
-    font-size: 16px;
+    font-size: 18px;
   }
 
-  /* Lightbox 手機優化 */
+  /* Lightbox 更貼合手機 */
   #lightbox img {
     max-width: 95%;
     max-height: 85%;
