@@ -1,9 +1,8 @@
-/* ===========================
-   全域設定
-=========================== */
+/* ============ 全域 ============ */
+* { box-sizing: border-box; }
 body {
-  background: transparent;
-  color: white;
+  background: #ffffff;
+  color: #000;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -19,61 +18,54 @@ body {
   opacity: 0.8;
 }
 
-/* ===========================
-   Carousel 外層
-=========================== */
+/* ============ Carousel 外層 ============ */
+/* 我們用 padding 為左右按鈕預留空間，避免把 grid 壓縮 */
 .carousel {
   position: relative;
   width: 100%;
   max-width: 1200px;
-
   display: flex;
   align-items: center;
-  justify-content: center; /* grid 置中 */
+  justify-content: center;
+  padding: 0 70px; /* <-- 預留按鈕空間（桌機） */
 }
 
-/* ===========================
-   左右按鈕
-=========================== */
+/* ============ 按鈕 ============ */
 .btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: #f2f2f2;
   border: 2px solid #b88dd6;
-  color: #c98dd6;
+  color: #b88dd6;
   font-size: 26px;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
 }
 
-#prev { left: -60px; }
-#next { right: -60px; }
+/* 按鈕靠外 */
+#prev { left: 10px; }   /* 距離容器左側 10px（容器有 padding） */
+#next { right: 10px; }
 
-.btn:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
+/* hover */
+.btn:hover { background: rgba(0,0,0,0.06); }
 
-/* 禁用按鈕 */
-button:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
+/* disabled */
+button:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* ===========================
-   彈性 Grid：自動依螢幕寬度調整
-=========================== */
+/* ============ 彈性 Grid ============ */
+/* grid 最小格子寬 minWidth：180px（跟 JS 一致） */
+/* justify-items: stretch 讓格子填滿格子空間 */
 .grid-wrapper {
   width: 100%;
   display: grid;
-
-  /* minmax: 每張縮到 180px 才換行 */
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 12px;
-
   justify-items: center;
+  align-items: start;
+  margin: 0;
 }
 
 /* item */
@@ -82,25 +74,32 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-}
-
-.item img {
   width: 100%;
-  max-width: 200px;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+}
+
+/* 圖片統一大小與比例 */
+.item img {
+  display: block;
+  width: 100%;
+  height: 260px;           /* 固定高度，確保各張一致 */
+  object-fit: cover;       /* 裁切填滿 */
   border-radius: 8px;
-  transition: 0.25s ease;
+  transition: transform .22s ease;
+  background: #f6f6f6;     /* 圖片尚未載入時的底色 */
 }
 
-/* hover */
-.item:hover img {
-  transform: scale(1.05);
+/* 自適應：當容器更窄時降低高度，避免過高 */
+@media (max-width: 480px) {
+  .item img { height: 180px; }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .item img { height: 220px; }
 }
 
-/* ===========================
-   Lightbox
-=========================== */
+/* hover 放大 */
+.item:hover img { transform: scale(1.03); }
+
+/* ============ Lightbox ============ */
 #lightbox {
   display: none;
   position: fixed;
@@ -110,22 +109,29 @@ button:disabled {
   align-items: center;
   z-index: 99;
 }
-
 #lightbox img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 12px;
 }
 
-/* ===========================
-   手機版調整（按鈕避免飛太遠）
-=========================== */
+/* ============ 手機微調（按鈕與 padding） ============ */
+@media (max-width: 900px) {
+  .carousel { padding: 0 50px; }
+  #prev { left: 6px; }
+  #next { right: 6px; }
+}
 @media (max-width: 600px) {
-  #prev { left: -20px; }
-  #next { right: -20px; }
+  .carousel { padding: 0 36px; }
+  #prev { left: 6px; }
+  #next { right: 6px; }
+}
+@media (max-width: 420px) {
+  .carousel { padding: 0 18px; }
+  #prev { left: 4px; }
+  #next { right: 4px; }
 }
 
-@media (max-width: 400px) {
-  #prev { left: -10px; }
-  #next { right: -10px; }
-}
+/* ============（除錯用，可臨時開啟看框線）===========
+.grid-wrapper { outline: 2px dashed rgba(255,0,0,0.12); }
+*/ 
