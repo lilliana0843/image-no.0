@@ -131,7 +131,3 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
   #prev { left: 4px; }
   #next { right: 4px; }
 }
-
-/* ============（除錯用，可臨時開啟看框線）===========
-.grid-wrapper { outline: 2px dashed rgba(255,0,0,0.12); }
-*/ 
