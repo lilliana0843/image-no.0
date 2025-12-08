@@ -47,7 +47,7 @@ function renderCarousel(isSlide = false, direction = 1) {
   // === 若要滑動動畫 ===
   if (isSlide) {
     slider.style.transition = "transform 0.35s ease-out";
-    slider.style.transform = `translateX(${direction * -40}px)`;
+    slider.style.transform = `translateX(${direction * 80}px)`;
   }
   
   setTimeout(() => {
@@ -88,7 +88,7 @@ function updateButtons() {
 prevBtn.addEventListener("click", () => {
   if (pageIndex > 0) {
     pageIndex--;
-    renderCarousel();
+    renderCarousel(true, -1);
   }
 });
 
@@ -96,7 +96,7 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
   if (pageIndex < Math.ceil(items.length / pageSize) - 1) {
     pageIndex++;
-    renderCarousel();
+    renderCarousel(true, 1);
   }
 });
 
