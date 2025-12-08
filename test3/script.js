@@ -1,11 +1,8 @@
-// ------------------------
 // 取得 DOM
-// ------------------------
 const items = Array.from(document.querySelectorAll(".item"));
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const counter = document.querySelector(".counter");
-const gridWrapper = document.querySelector(".grid-wrapper");
 
 let pageSize = 10;
 let pageIndex = 0;
@@ -14,127 +11,72 @@ let pageIndex = 0;
 const MIN_COL_WIDTH = 180; // px
 const GAP = 12; // grid gap (與 CSS 一致)
 
-// ------------------------
-// 計算一頁可容納多少 item（兩行）
-// ------------------------
+/* 計算目前一頁可顯示幾個 item（欄數 * 固定 2 行） */
 function updatePageSize() {
   const grid = document.querySelector(".grid-wrapper");
   if (!grid) { pageSize = 4; return; }
-
   const gridWidth = grid.getBoundingClientRect().width;
+
+  // 計算能放多少欄（考慮 gap）
+  // 若欄為 n，總寬約 = n * MIN_COL_WIDTH + (n - 1) * GAP
+  // solve for n: n <= (gridWidth + GAP) / (MIN_COL_WIDTH + GAP)
   const possibleColumns = Math.floor((gridWidth + GAP) / (MIN_COL_WIDTH + GAP));
   const columns = Math.max(1, possibleColumns);
-  const rows = 2; 
+
+  const rows = 2; // 固定顯示 2 行（可改成變數）
   pageSize = columns * rows;
 }
 
-// ------------------------
-// 🔥 建立 page-wrapper（滑動頁面需要）
-// ------------------------
-function rebuildPages() {
+/* 重新渲染當前頁面 */
+function renderCarousel() {
   updatePageSize();
 
-  // 移除舊 page-wrapper
-  const oldPages = document.querySelectorAll(".page-wrapper");
-  oldPages.forEach(p => p.remove());
+  // 計算總頁數並確保 pageIndex 不超界
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  if (pageIndex >= totalPages) pageIndex = totalPages - 1;
+  if (pageIndex < 0) pageIndex = 0;
 
-  gridWrapper.style.display = "flex";
-  gridWrapper.style.transition = "none"; // 初始化不需要動畫
-  gridWrapper.style.transform = "translateX(0)";
+  // 隱藏全部
+  items.forEach(item => (item.style.display = "none"));
 
-  const totalPages = Math.ceil(items.length / pageSize);
-  gridWrapper.style.width = `${totalPages * 100}%`;
+  // 顯示本頁
+  const start = pageIndex * pageSize;
+  const end = Math.min(start + pageSize, items.length);
+  items.slice(start, end).forEach(item => item.style.display = "flex");
 
-  let index = 0;
-
-  for (let p = 0; p < totalPages; p++) {
-    const page = document.createElement("div");
-    page.className = "page-wrapper";
-    page.style.width = `${100 / totalPages}%`;
-    page.style.display = "grid";
-    page.style.gridTemplateColumns = "repeat(auto-fill, minmax(180px, 1fr))";
-    page.style.gap = `${GAP}px`;
-
-    for (let i = 0; i < pageSize && index < items.length; i++) {
-      page.appendChild(items[index]);
-      index++;
-    }
-
-    gridWrapper.appendChild(page);
-  }
+  updateCounter();
+  updateButtons();
 }
 
-// ------------------------
-// 更新 counter
-// ------------------------
+/* 更新 counter */
 function updateCounter() {
   const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
   counter.textContent = `${pageIndex + 1} / ${totalPages}`;
 }
 
-// ------------------------
-// 更新按鈕
-// ------------------------
+/* 更新按鈕狀態 */
 function updateButtons() {
-  const totalPages = Math.ceil(items.length / pageSize);
   prevBtn.disabled = pageIndex === 0;
-  nextBtn.disabled = pageIndex >= totalPages - 1;
+  nextBtn.disabled = pageIndex >= Math.ceil(items.length / pageSize) - 1;
 }
 
-// ------------------------
-// 🔥 滑動翻頁核心
-// ------------------------
-function slideToPage(index) {
-  const totalPages = Math.ceil(items.length / pageSize);
-
-  if (index < 0 || index >= totalPages) return;
-
-  pageIndex = index;
-
-  gridWrapper.style.transition = "transform 0.45s ease";
-  gridWrapper.style.transform = `translateX(${-pageIndex * 100}%)`;
-
-  updateButtons();
-  updateCounter();
-}
-
-// ------------------------
-// 初始化 + 渲染
-// ------------------------
-function renderCarousel() {
-  const oldIndex = pageIndex;
-  rebuildPages();
-
-  // 超過最大頁數就調整
-  const totalPages = Math.ceil(items.length / pageSize);
-  if (pageIndex >= totalPages) pageIndex = totalPages - 1;
-  if (pageIndex < 0) pageIndex = 0;
-
-  // 立即定位到正確頁面（不使用動畫）
-  gridWrapper.style.transition = "none";
-  gridWrapper.style.transform = `translateX(${-pageIndex * 100}%)`;
-
-  updateButtons();
-  updateCounter();
-}
-
-// ------------------------
-// 按鈕事件
-// ------------------------
+/* 綁定上下頁 */
 prevBtn.addEventListener("click", () => {
-  slideToPage(pageIndex - 1);
+  if (pageIndex > 0) {
+    pageIndex--;
+    renderCarousel();
+  }
 });
-
 nextBtn.addEventListener("click", () => {
-  slideToPage(pageIndex + 1);
+  if (pageIndex < Math.ceil(items.length / pageSize) - 1) {
+    pageIndex++;
+    renderCarousel();
+  }
 });
 
-// ------------------------
-// lightbox
-// ------------------------
+/* lightbox */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
-
 items.forEach(item => {
   item.addEventListener("click", () => {
     const img = item.querySelector("img");
@@ -144,19 +86,14 @@ items.forEach(item => {
     lightbox.style.display = "flex";
   });
 });
-
 lightbox.addEventListener("click", () => lightbox.style.display = "none");
 
-// ------------------------
-// resize 時重新計算
-// ------------------------
+/* resize 時重算 */
 let resizeTimer;
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => renderCarousel(), 150);
+  resizeTimer = setTimeout(() => renderCarousel(), 120);
 });
 
-// ------------------------
-// 初始化
-// ------------------------
+/* 初始化 */
 document.addEventListener("DOMContentLoaded", () => renderCarousel());
