@@ -92,6 +92,16 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
   object-position: right;
 }
 
+/* 特定圖片移動位置(左) */
+.pos-left {
+  object-position: left;
+}
+
+/* 特定圖片移動位置(右) */
+.pos-top {
+  object-position: top;
+}
+
 /* 自適應：當容器更窄時降低高度，避免過高 */
 @media (max-width: 480px) {
   .item img { height: 180px; }
