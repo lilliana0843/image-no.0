@@ -41,11 +41,21 @@ function renderCarousel() {
   if (pageIndex >= totalPages) pageIndex = totalPages - 1;
   if (pageIndex < 0) pageIndex = 0;
 
-  // ======= 滑動動畫容器 =======
-  const slider = document.querySelector(".grid-wrapper");
-  slider.style.transition = "opacity 0.25s ease-out";
-  slider.style.opacity = "0";
+/* 渲染頁面（滑動效果） */
+function renderCarousel(isSlide = false, direction = 1) {
+  updatePageSize();
 
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  pageIndex = Math.max(0, Math.min(pageIndex, totalPages - 1));
+
+  const slider = document.querySelector(".grid-wrapper");
+
+  // === 若要滑動動畫 ===
+  if (isSlide) {
+    slider.style.transition = "transform 0.35s ease-out";
+    slider.style.transform = `translateX(${direction * -40}px)`;
+  }
+  
   setTimeout(() => {
     // 全隱藏
     items.forEach(item => (item.style.display = "none"));
@@ -58,9 +68,14 @@ function renderCarousel() {
     updateCounter();
     updateButtons();
 
-    // 淡入
-    slider.style.opacity = "1";
-  }, 200);
+   // === 滑動回來 ===
+    if (isSlide) {
+      slider.style.transform = "translateX(0px)";
+    } else {
+      slider.style.transition = "none";
+      slider.style.transform = "translateX(0px)";
+    }
+    }, isSlide ? 120 : 0);
 }
 
 /* 更新 Counter */
