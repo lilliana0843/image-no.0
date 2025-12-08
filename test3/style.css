@@ -2,7 +2,7 @@
 * { box-sizing: border-box; }
 body {
   background: transparent;
-  color: white;
+  color: #000;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
