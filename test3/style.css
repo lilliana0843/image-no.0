@@ -104,10 +104,10 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* 自適應：當容器更窄時降低高度，避免過高 */
 @media (max-width: 480px) {
-  .item img { height: 180px; }
+  .item img { aspect-ratio: 3/4; }
 }
 @media (min-width: 481px) and (max-width: 768px) {
-  .item img { height: 220px; }
+  .item img { aspect-ratio: 3/4; }
 }
 
 /* hover 放大 */
@@ -134,14 +134,20 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
   .carousel { padding: 0 50px; }
   #prev { left: 6px; }
   #next { right: 6px; }
+  .btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
 }
 @media (max-width: 600px) {
   .carousel { padding: 0 36px; }
   #prev { left: 6px; }
   #next { right: 6px; }
+
 }
 @media (max-width: 420px) {
   .carousel { padding: 0 18px; }
   #prev { left: 4px; }
   #next { right: 4px; }
+
 }
