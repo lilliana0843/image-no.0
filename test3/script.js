@@ -33,13 +33,7 @@ function updatePageSize() {
   pageSize = columns * rows;
 }
 
-/* 渲染頁面 */
-function renderCarousel() {
-  updatePageSize();
 
-  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
-  if (pageIndex >= totalPages) pageIndex = totalPages - 1;
-  if (pageIndex < 0) pageIndex = 0;
 
 /* 渲染頁面（滑動效果） */
 function renderCarousel(isSlide = false, direction = 1) {
