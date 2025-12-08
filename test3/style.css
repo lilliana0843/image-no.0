@@ -102,15 +102,6 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
   object-position: top;
 }
 
-/* ========== 換頁淡入動畫 ========== */
-.fade {
-  opacity: 0;
-  transition: opacity .35s ease;
-}
-
-.fade.show {
-  opacity: 1;
-}
 
 
 /* ========== 自適應：當容器更窄時降低高度，避免過高========== */
