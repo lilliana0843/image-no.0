@@ -94,7 +94,7 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* 特定圖片移動位置(左) */
 .pos-left {
-  object-position: 50% 15% ;
+  object-position: 50% 5% ;
 }
 
 /* 特定圖片移動位置(右) */
