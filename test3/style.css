@@ -81,7 +81,7 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 .item img {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 3; /* ← 這行控制圖片比例 */
+  aspect-ratio: 2/3; /* ← 這行控制圖片比例 */
   object-fit: cover;       /* 裁切填滿 */
   border-radius: 8px;
   transition: transform .22s ease;
