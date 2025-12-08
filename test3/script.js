@@ -35,7 +35,7 @@ function updatePageSize() {
 
 
 
-/* 渲染頁面（滑動效果） */
+/* 渲染頁面（真正平移滑動效果） */
 function renderCarousel(isSlide = false, direction = 1) {
   updatePageSize();
 
@@ -44,14 +44,15 @@ function renderCarousel(isSlide = false, direction = 1) {
 
   const slider = document.querySelector(".grid-wrapper");
 
-  // === 若要滑動動畫 ===
+  // ----------- 左右滑動動畫 -----------
   if (isSlide) {
-    slider.style.transition = "transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)";
-    slider.style.transform = `translateX(${direction * -150}px)`;
+    slider.style.transition = "transform 0.45s ease-out";
+    slider.style.transform = `translateX(${direction * -120}px)`; 
   }
-  
+
+  // 讓滑動有停頓感才有翻頁效果
   setTimeout(() => {
-    // 全隱藏
+    // 隱藏全部
     items.forEach(item => (item.style.display = "none"));
 
     // 顯示本頁
@@ -62,15 +63,13 @@ function renderCarousel(isSlide = false, direction = 1) {
     updateCounter();
     updateButtons();
 
-   // === 滑動回來 ===
-    if (isSlide) {
-      slider.style.transform = "translateX(0px)";
-    } else {
-      slider.style.transition = "none";
-      slider.style.transform = "translateX(0px)";
-    }
-    }, isSlide ? 120 : 0);
+    // 復位
+    slider.style.transform = "translateX(0)";
+    slider.style.transition = "transform 0.30s ease-out";
+
+  }, isSlide ? 150 : 0);
 }
+
 
 /* 更新 Counter */
 function updateCounter() {
