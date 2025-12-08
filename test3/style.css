@@ -61,6 +61,8 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
   align-items: start;
   margin: 0;
   transition: transform 0.45s ease; /* ← 滑動翻頁效果在這裡 */
+   overflow-x: hidden; 
+  overflow-y: visible;
 }
 
 /* item */
