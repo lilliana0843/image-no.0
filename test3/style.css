@@ -89,15 +89,15 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 }
 /* 特定圖片移動位置(右) */
 .pos-right {
-  object-position: 50% 95%;
+  object-position: 95% 50%;
 }
 
 /* 特定圖片移動位置(左) */
 .pos-left {
-  object-position: 50% 5% ;
+  object-position: 5% 50% ;
 }
 
-/* 特定圖片移動位置(右) */
+/* 特定圖片移動位置(上) */
 .pos-top {
   object-position: top;
 }
