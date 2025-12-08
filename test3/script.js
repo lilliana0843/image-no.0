@@ -46,8 +46,8 @@ function renderCarousel(isSlide = false, direction = 1) {
 
   // === 若要滑動動畫 ===
   if (isSlide) {
-    slider.style.transition = "transform 0.15s ease-out";
-    slider.style.transform = `translateX(${direction * 120}px)`;
+    slider.style.transition = "transform 0.55s ease-out";
+    slider.style.transform = `translateX(${direction * -150}px)`;
   }
   
   setTimeout(() => {
