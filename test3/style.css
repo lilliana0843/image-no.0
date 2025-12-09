@@ -139,18 +139,20 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
   .btn {
     font-size: 10px;
-    top: calc(25vw + 12px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    top: calc((50% + 30px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
     transform: translateY(-50%);
   }
 }
 @media (max-width: 600px) {
 .btn {
-    
+    top: calc((50% + 30px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    transform: translateY(-50%);
   }
+
 }
 @media (max-width: 420px) {
 .btn {
-    top: calc(25vw + 12px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    top: calc((50% + 30px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
     transform: translateY(-50%);
   }
 
