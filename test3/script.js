@@ -46,7 +46,7 @@ function renderCarousel(isSlide = false, direction = 1) {
 
   // ----------- 左右滑動動畫 -----------
   if (isSlide) {
-    slider.style.transition = "transform 0.5s ease-out";
+    slider.style.transition = "transform 0.3s ease-out";
     slider.style.transform = `translateX(${direction * -3000}px)`; 
   }
 
@@ -67,7 +67,7 @@ function renderCarousel(isSlide = false, direction = 1) {
     slider.style.transform = "translateX(0)";
     slider.style.transition = "transform 0.30s ease-out";
 
-  }, isSlide ? 150 : 0);
+  }, isSlide ? 180 : 0);
 }
 
 
