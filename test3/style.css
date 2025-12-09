@@ -136,10 +136,13 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* ============ 手機微調（按鈕與 padding） ============ */
 @media (max-width: 900px) {
+  .carousel { padding: 0 36px; }
+  #prev { left: 6px; }
+  #next { right: 6px; }
 
+  /* 加上這段就能固定在兩行中間 */
   .btn {
-    font-size: 10px;
-    top: calc((50% + 30px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    top: calc(25vw + 12px);
     transform: translateY(-50%);
   }
 }
