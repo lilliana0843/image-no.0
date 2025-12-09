@@ -136,23 +136,22 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* ============ 手機微調（按鈕與 padding） ============ */
 @media (max-width: 900px) {
-  .carousel { padding: 0 50px; }
-  #prev { left: 6px; }
-  #next { right: 6px; }
+
   .btn {
     font-size: 10px;
-    padding: 4px 8px;
+    top: calc(25vw + 12px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    transform: translateY(-50%);
   }
 }
 @media (max-width: 600px) {
-  .carousel { padding: 0 36px; }
-  #prev { left: 6px; }
-  #next { right: 6px; }
-
+.btn {
+    
+  }
 }
 @media (max-width: 420px) {
-  .carousel { padding: 0 18px; }
-  #prev { left: 4px; }
-  #next { right: 4px; }
+.btn {
+    top: calc(25vw + 12px); /* 25vw = 圖片群的垂直中心，12px 是 gap 的一半 */
+    transform: translateY(-50%);
+  }
 
 }
