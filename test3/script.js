@@ -47,7 +47,7 @@ function renderCarousel(isSlide = false, direction = 1) {
   // ----------- 左右滑動動畫 -----------
   if (isSlide) {
     slider.style.transition = "transform 0.3s ease-out";
-    slider.style.transform = `translateX(${direction * -1500}px)`; 
+    slider.style.transform = `translateX(${direction * -500}px)`; 
   }
 
   // 讓滑動有停頓感才有翻頁效果
