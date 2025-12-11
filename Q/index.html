@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview Carousel</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 計數器 -->
+  <div class="counter">1 / 12</div>
+
+  <!-- 主要輪播（左右位置不變，但內容改成上下切頁） -->
+  <div class="carousel">
+
+    <!-- 上一頁（本質是往上） -->
+    <button id="prev" class="btn">〈</button>
+
+    <!-- 顯示區：10 張（5x2） -->
+    <div class="grid-wrapper">
+      <!-- 你的 items（不用 active） -->
+      <div class="item">
+        <img src="../img/Q/螢河.mp4" data-full="../img/Q/螢河.mp4" />
+        <p class="caption">螢河</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/花店19.png" data-full="../img/Q/花店19.png" />
+        <p class="caption">花店</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/花店(6).png" data-full="../img/Q/花店(6).png" />
+        <p class="caption">花店</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/278.png" data-full="../img/Q/278.png" />
+        <p class="caption">花店</p>
+      </div>
+    
+      <div class="item">
+        <img src="../img/Q/花店(14).png" data-full="../img/Q/花店(14).png" />
+        <p class="caption">花店</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/花店(12).png" data-full="../img/Q/花店(12).png" />
+        <p class="caption">花店</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/用戶名.jpg" data-full="../img/Q/用戶名.jpg" />
+        <p class="caption">用戶名</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/粉圓(白底).png" data-full="../img/Q/粉圓(白底).png" />
+        <p class="caption">粉圓</p>
+      </div>
+
+      <div class="item">
+        <img  src="../img/Q/毛毛-4(白底).png" data-full="../img/Q/毛毛-4(白底).png" />
+        <p class="caption">毛毛</p>
+      </div>
+
+      <div class="item">
+        <img  src="../img/Q/乎咪.png" data-full="../img/Q/乎咪.png" />
+        <p class="caption">乎咪</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/乎咪3.png" data-full="../img/Q/乎咪3.png" />
+        <p class="caption">乎咪</p>
+      </div>
+
+      <div class="item">
+        <img  src="../img/Q/乎咪5白底.png" data-full="../img/Q/乎咪5白底.png" />
+        <p class="caption">乎咪</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/Q/9白底.png" data-full="../img/Q/9白底.png" />
+        <p class="caption">乎咪</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/8.PNG" data-full="../img/Q/8.PNG" />
+        <p class="caption">乎咪</p>
+      </div>
+      
+      <div class="item">
+        <img  src="../img/Q/沒禮貌飯友1.png" data-full="../img/Q/沒禮貌飯友1.png" />
+        <p class="caption">乎咪</p>
+      </div>
+
+        <div class="item">
+        <img  src="../img/Q/桃符7.jpg" data-full="../img/Q/桃符7.jpg" />
+        <p class="caption">桃符</p>
+      </div>
+
+        <div class="item">
+        <img  src="../img/Q/東醬.jpg" data-full="../img/Q/東醬.jpg" />
+        <p class="caption">東醬</p>
+      </div>
+    
+      <div class="item">
+        <img src="../img/Q/朗尼.png" data-full="../img/Q/朗尼.png" />
+        <p class="caption">朗尼</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/Q/子或2(白底).png" data-full="../img/Q/子或2(白底).png" />
+        <p class="caption">子或</p>
+      </div>
+      
+       <div class="item">
+        <img src="../img/Q/棉狼(白底).png" data-full="../img/Q/棉狼(白底).png" />
+        <p class="caption">棉狼</p>
+      </div>
+
+       <div class="item">
+        <img  src="../img/Q/王亮亮5.jpg" data-full="../img/Q/王亮亮5.jpg" />
+        <p class="caption">王亮亮</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/Q/噗通6.png" data-full="../img/Q/噗通6.png" />
+        <p class="caption">噗通</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/噗通5.png" data-full="../img/Q/噗通5.png" />
+        <p class="caption">噗通</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/噗通3.jpg" data-full="../img/Q/噗通3.jpg" />
+        <p class="caption">噗通</p>
+      </div>
+
+      <div class="item">
+        <img  src="../img/Q/噗幣轉蛋(白底).png" data-full="../img/Q/噗幣轉蛋(白底).png" />
+        <p class="caption">噗幣轉蛋</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/Q/人造芒芒細胞.png" data-full="../img/Q/人造芒芒細胞.png" />
+        <p class="caption">人造芒芒細胞</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/Q/魚哥.PNG" data-full="../img/Q/魚哥.PNG" />
+        <p class="caption">魚哥</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/Q/knyigi.png" data-full="../img/Q/knyigi.png" />
+        <p class="caption">knyigi</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/Q/shizuru-1.jpg" data-full="../img/Q/shizuru-1.jpg" />
+        <p class="caption">shizuru</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/shizuru-2.jpg" data-full="../img/Q/shizuru-2.jpg" />
+        <p class="caption">shizuru</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/Q/ユᕕ( ᐛ )ᕗ.gif" data-full="../img/Q/ユᕕ( ᐛ )ᕗ.gif" />
+        <p class="caption">ユᕕ( ᐛ )ᕗ</p>
+      </div>
+      
+     <div class="item">
+        <img src="../img/Q/森諾2(1).jpg" data-full="../img/Q/森諾2(1).jpg" />
+        <p class="caption">森諾</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/Q/欞清羽2(1).png" data-full="../img/Q/欞清羽2(1).png" />
+        <p class="caption">欞清羽</p>
+      </div>
+    
+      <div class="item">
+        <img src="../img/all/1.PNG" data-full="../img/all/1.PNG" />
+        <p class="caption">乎咪</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/all/2.PNG" data-full="../img/all/2.PNG" />
+        <p class="caption">乎咪</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/拍立得2.PNG" data-full="../img/all/拍立得2.PNG" />
+        <p class="caption">乎咪</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/螢河2.png" data-full="../img/all/螢河2.png" />
+        <p class="caption">螢河</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/螢河4(3).png" data-full="../img/all/螢河4(3).png" />
+        <p class="caption">螢河</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/明-1.PNG" data-full="../img/all/明-1.PNG" />
+        <p class="caption">明</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/明-2.png" data-full="../img/all/明-2.png" />
+        <p class="caption">明</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/明-3.png" data-full="../img/all/明-3.png" />
+        <p class="caption">明</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/C子.png" data-full="../img/all/C子.png" />
+        <p class="caption">C子</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/IMG_1566.PNG" data-full="../img/all/IMG_1566.PNG" />
+        <p class="caption">魚骨</p>
+      </div>
+
+       <div class="item">
+        <img src="../img/all/釉烟2.jpeg" data-full="../img/all/釉烟2.jpeg" />
+        <p class="caption">魚骨</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/Kino.jpg" data-full="../img/all/Kino.jpg" />
+        <p class="caption">Kino</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/remi-2.PNG" data-full="../img/all/remi-2.PNG" />
+        <p class="caption">remi</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/久捌.jpg" data-full="../img/all/久捌.jpg" />
+        <p class="caption">久捌</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/伊比比5.jpg" data-full="../img/all/伊比比5.jpg" />
+        <p class="caption">伊比比</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/伏見 さま-1.PNG" data-full="../img/all/伏見 さま-1.PNG" />
+        <p class="caption">伏見 さま</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/伏見 さま.png" data-full="../img/all/伏見 さま.png" />
+        <p class="caption">伏見 さま</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/侑橋.jpg" data-full="../img/all/侑橋.jpg" />
+        <p class="caption">侑橋</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/卷Kyoya.png" data-full="../img/all/卷Kyoya.png" />
+        <p class="caption">卷Kyoya</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/唐醋.png" data-full="../img/all/唐醋.png" />
+        <p class="caption">唐醋</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/阿魚-1.jpg" data-full="../img/all/阿魚-1.jpg" />
+        <p class="caption">阿魚</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/阿魚2.jpg" data-full="../img/all/阿魚2.jpg" />
+        <p class="caption">阿魚</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/子或.png" data-full="../img/all/子或.png" />
+        <p class="caption">子或</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/李哀哀.png" data-full="../img/all/李哀哀.png" />
+        <p class="caption">李哀哀</p>
+      </div>
+
+      <div class="item">
+        <img class="pos-left" src="../img/all/柴魚ㄅ(2).png" data-full="../img/all/柴魚ㄅ(2).png" />
+        <p class="caption">柴魚ㄅ(2)</p>
+      </div>
+
+      <div class="item">
+        <img class="pos-right" src="../img/all/海狸茲.png" data-full="../img/all/海狸茲.png" />
+        <p class="caption">海狸茲</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/狸央-2.png" data-full="../img/all/狸央-2.png" />
+        <p class="caption">狸央</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/狸央.png" data-full="../img/all/狸央.png" />
+        <p class="caption">狸央</p>
+      </div>
+
+      <div class="item">
+        <img class="pos-left" src="../img/all/筆刷狂轉努力趕稿人-1.jpg" data-full="../img/all/筆刷狂轉努力趕稿人-1.jpg" />
+        <p class="caption">筆刷狂轉努力趕稿人</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/肥宅1.png" data-full="../img/all/肥宅1.png" />
+        <p class="caption">肥宅</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/芋泥琥皮卷.PNG" data-full="../img/all/芋泥琥皮卷.PNG" />
+        <p class="caption">芋泥琥皮卷</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/蘇蘇-1.png" data-full="../img/all/蘇蘇-1.png" />
+        <p class="caption">蘇蘇</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/費米.png" data-full="../img/all/費米.png" />
+        <p class="caption">費米</p>
+      </div>
+
+      <div class="item">
+        <img class="pos-left" src="../img/all/路欸欸.png" data-full="../img/all/路欸欸.png" />
+        <p class="caption">路欸欸</p>
+      </div>
+
+     <div class="item">
+        <img src="../img/all/數學終於及格了再見吧排列組合.jpg" data-full="../img/all/數學終於及格了再見吧排列組合.jpg" />
+        <p class="caption">數學終於及格了再見吧排列組合</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/滑滑.jpg" data-full="../img/all/滑滑.jpg" />
+        <p class="caption">滑滑</p>
+      </div>
+     <div class="item">
+        <img src="../img/all/雞排.jpg" data-full="../img/all/雞排.jpg" />
+        <p class="caption">雞排</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/韓子高1.png" data-full="../img/all/韓子高1.png" />
+        <p class="caption">韓子高</p>
+      </div>
+      
+      <div class="item">
+        <img src="../img/all/一六.jpg" data-full="../img/all/一六.jpg" />
+        <p class="caption">一六</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/噗幣轉蛋(13).png" data-full="../img/all/噗幣轉蛋(13).png" />
+        <p class="caption">噗幣轉蛋</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/噗幣轉蛋(4).png" data-full="../img/all/噗幣轉蛋(4).png" />
+        <p class="caption">噗幣轉蛋</p>
+      </div>
+
+      <div class="item">
+        <img src="../img/all/噗幣轉蛋(9).png" data-full="../img/all/噗幣轉蛋(9).png" />
+        <p class="caption">噗幣轉蛋</p>
+      </div>
+</div>
+
+    <!-- 下一頁（本質是往下） -->
+    <button id="next" class="btn">〉</button>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <img id="lightbox-img">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
