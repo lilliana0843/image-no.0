@@ -137,7 +137,7 @@ button:disabled { opacity: 0.3; cursor: not-allowed; }
 
 
 /* ============ 手機微調（按鈕與 padding） ============ */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .carousel { padding: 0 50px; }
   #prev { left: 6px; }
   #next { right: 6px; }
