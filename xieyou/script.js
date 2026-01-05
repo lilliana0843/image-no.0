@@ -1,4 +1,3 @@
-
 // 取得 DOM
 const items = Array.from(document.querySelectorAll(".item"));
 const prevBtn = document.getElementById("prev");
