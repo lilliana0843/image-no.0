@@ -1,4 +1,3 @@
-counter.textContent = `${currentPage} / ${totalPages}`;
 
 // 取得 DOM
 const items = Array.from(document.querySelectorAll(".item"));
